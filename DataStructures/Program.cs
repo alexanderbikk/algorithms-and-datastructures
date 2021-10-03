@@ -20,15 +20,23 @@ namespace DataStructures
             binarySearchTreee.InsertValueRecursive(9);
             binarySearchTreee.InsertValueRecursive(2);
 
-            Console.WriteLine("-------Print Depth First---------");
+            Console.WriteLine("-------Print Depth First Recurive---------");
             Console.WriteLine();
 
             binarySearchTreee.PrintDpethTreeRecursive(binarySearchTreee.Root);
 
-
-            Console.WriteLine("-------Print Breadth First---------");
+            Console.WriteLine("-------Print Depth First Iterative Stack---------");
             Console.WriteLine();
-            var result = binarySearchTreee.PrintBreadthTree(binarySearchTreee.Root);
+
+            var result = binarySearchTreee.PrintDepthTree(binarySearchTreee.Root);
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }            
+
+            Console.WriteLine("-------Print Breadth First Iterative Queueu---------");
+            Console.WriteLine();
+            result = binarySearchTreee.PrintBreadthTree(binarySearchTreee.Root);
 
             foreach (var item in result)
             {

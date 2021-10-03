@@ -48,6 +48,34 @@ namespace DataStructures.Trees.BST
         }
 
         /// <summary>
+        /// Iterative
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public List<T> PrintDepthTree(Node<T> root)
+        {
+            var results = new List<T>();
+            var nodes = new Stack<Node<T>>();
+            var currentNode = root;
+
+            while (nodes.Count != 0 || currentNode != null)
+            {
+                if (currentNode != null)
+                {
+                    nodes.Push(currentNode);
+                    currentNode = currentNode.LeftChild;
+                }
+                else
+                {
+                    currentNode = nodes.Pop();
+                    results.Add(currentNode.Value);
+                    currentNode = currentNode.RightChild;
+                }                
+            }
+            return results;
+        }
+
+        /// <summary>
         /// Using Queueu
         /// </summary>
         /// <param name="root"></param>
