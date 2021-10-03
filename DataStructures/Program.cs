@@ -10,26 +10,36 @@ namespace DataStructures
             Console.WriteLine("-------Init and Insert---------");
             Console.WriteLine();
 
-            var benarySearchTreee = new BinarySearchTree<int>(13);
-            benarySearchTreee.InsertValueRecursive(4);
-            benarySearchTreee.InsertValueRecursive(7);
-            benarySearchTreee.InsertValueRecursive(16);
-            benarySearchTreee.InsertValueRecursive(19);
-            benarySearchTreee.InsertValueRecursive(3);
-            benarySearchTreee.InsertValueRecursive(1);
-            benarySearchTreee.InsertValueRecursive(9);
-            benarySearchTreee.InsertValueRecursive(2);
+            var binarySearchTreee = new BinarySearchTree<int>(13);
+            binarySearchTreee.InsertValueRecursive(4);
+            binarySearchTreee.InsertValueRecursive(7);
+            binarySearchTreee.InsertValueRecursive(16);
+            binarySearchTreee.InsertValueRecursive(19);
+            binarySearchTreee.InsertValueRecursive(3);
+            binarySearchTreee.InsertValueRecursive(1);
+            binarySearchTreee.InsertValueRecursive(9);
+            binarySearchTreee.InsertValueRecursive(2);
 
-            Console.WriteLine("-------Print---------");
+            Console.WriteLine("-------Print Depth First---------");
             Console.WriteLine();
 
-            benarySearchTreee.PrintTree(benarySearchTreee.Root);
+            binarySearchTreee.PrintDpethTreeRecursive(binarySearchTreee.Root);
+
+
+            Console.WriteLine("-------Print Breadth First---------");
+            Console.WriteLine();
+            var result = binarySearchTreee.PrintBreadthTree(binarySearchTreee.Root);
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }
 
             Console.WriteLine("-------Search---------");
             Console.WriteLine();
 
             var value = 4;
-            var resultNode = benarySearchTreee.SearchRecursive(benarySearchTreee.Root, value);
+            var resultNode = binarySearchTreee.SearchRecursive(binarySearchTreee.Root, value);
             if (resultNode != null)
             {                
                 Console.WriteLine($"Result node {resultNode.Value}");            
@@ -38,6 +48,11 @@ namespace DataStructures
             {
                 Console.WriteLine($"Node with value {value} not found.");
             }
+
+
+            Console.WriteLine("-------Height---------");
+            var height = binarySearchTreee.Height(binarySearchTreee.Root);
+            Console.WriteLine(height);
         }
     }
 }

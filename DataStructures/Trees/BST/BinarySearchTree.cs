@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DataStructures.Trees.BST
 {
@@ -17,15 +18,62 @@ namespace DataStructures.Trees.BST
             Root = root;
         }
 
-        public void PrintTree(Node<T> root)
+        public int Height(Node<T> node)
+        {            
+            if (node == null)
+            {
+                return -1;
+            }
+
+            var leftHeight = Height(node.LeftChild);
+            var rightHeight = Height(node.RightChild);
+
+            return Math.Max(leftHeight, rightHeight) + 1;   
+        }
+
+        /// <summary>
+        /// In-order 
+        /// </summary>
+        /// <param name="root"></param>
+        public void PrintDpethTreeRecursive(Node<T> root)
         {
             if (root == null)
             {
                 return;
             }
-            PrintTree(root.LeftChild);
+
+            PrintDpethTreeRecursive(root.LeftChild);
             Console.WriteLine($"{root.Value} ");
-            PrintTree(root.RightChild);
+            PrintDpethTreeRecursive(root.RightChild);
+        }
+
+        /// <summary>
+        /// Using Queueu
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public List<T> PrintBreadthTree(Node<T> root)
+        {
+            var results = new List<T>();
+            var nodes = new Queue<Node<T>>();
+
+            nodes.Enqueue(root);
+
+            while (nodes.Count != 0)
+            {
+                var currentNode = nodes.Dequeue();
+                results.Add(currentNode.Value);
+
+                if (currentNode.LeftChild != null)
+                {
+                    nodes.Enqueue(currentNode.LeftChild);
+                }
+                if (currentNode.RightChild != null)
+                {
+                    nodes.Enqueue(currentNode.RightChild);
+                }
+            }
+            return results;
         }
 
         /// <summary>
@@ -127,7 +175,7 @@ namespace DataStructures.Trees.BST
         }
 
         public Node<T> SearchRecursive(Node<T> currentNode, T value)
-        {            
+        {
             if (currentNode == null || value?.CompareTo(currentNode.Value) == 0)
             {
                 return currentNode;
