@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataStructures.Trees.BST
+namespace AlgorithmsAndDataStructures.Trees.BST
 {
     public class Node<T>
         where T : IComparable
