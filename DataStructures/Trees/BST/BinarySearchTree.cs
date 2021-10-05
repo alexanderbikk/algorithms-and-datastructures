@@ -19,7 +19,7 @@ namespace AlgorithmsAndDataStructures.Trees.BST
         }
 
         public int Height(Node<T> node)
-        {            
+        {
             if (node == null)
             {
                 return -1;
@@ -28,7 +28,7 @@ namespace AlgorithmsAndDataStructures.Trees.BST
             var leftHeight = Height(node.LeftChild);
             var rightHeight = Height(node.RightChild);
 
-            return Math.Max(leftHeight, rightHeight) + 1;   
+            return Math.Max(leftHeight, rightHeight) + 1;
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace AlgorithmsAndDataStructures.Trees.BST
                     currentNode = nodes.Pop();
                     results.Add(currentNode.Value);
                     currentNode = currentNode.RightChild;
-                }                
+                }
             }
             return results;
         }
@@ -176,6 +176,89 @@ namespace AlgorithmsAndDataStructures.Trees.BST
                     return;
                 }
             }
+        }
+
+        public bool DeleteValueRecursive(T value)
+        {
+            return DeleteValueRecursiveInternal(Root, null, value);
+        }
+
+        private bool DeleteValueRecursiveInternal(Node<T> node, Node<T> parentNode, T value)
+        {
+            if (node == null)
+            {
+                return false;
+            }
+
+            if (value?.CompareTo(node.Value) == 0)
+            {
+                // Leaf node or Node with one child
+                if (node.LeftChild == null || node.RightChild == null)
+                {
+                    // Node with left child
+                    if (node.LeftChild != null)
+                    {
+                        // Depends on node's value put it either to left or right substree
+                        if (node.LeftChild.Value?.CompareTo(parentNode.Value) > 0)
+                        {
+                            parentNode.RightChild = node.LeftChild;
+                        }
+                        else
+                        {
+                            parentNode.LeftChild = node.LeftChild;
+                        }
+                        return true;
+                    }
+
+                    // Node with righ child
+                    if (node.RightChild != null)
+                    {
+                        // Depends on node's value put it either to left or right substree
+                        if (node.RightChild.Value?.CompareTo(parentNode.Value) > 0)
+                        {
+                            parentNode.RightChild = node.RightChild;
+                        }
+                        else
+                        {
+                            parentNode.LeftChild = node.RightChild;
+                        }
+                        return true;
+                    }
+
+                    // Leaf node
+                    if (node.Value?.CompareTo(parentNode.Value) > 0)
+                    {
+                        parentNode.RightChild = null;
+                    }
+                    else
+                    {
+                        parentNode.LeftChild = null;
+                    }
+                    return true;
+                }
+                //Node with two children
+                else
+                {
+                    //Find least value in the right sub-tree
+                    var currentNode = node.RightChild;
+
+                    while (currentNode.LeftChild != null)
+                    {
+                        currentNode = currentNode.LeftChild;
+                    }
+
+                    // Delete found least value in the right-substree
+                    // since it's leaf value jut run recursion again
+                    DeleteValueRecursiveInternal(Root, null, currentNode.Value);
+
+                    //Swap value
+                    node.Value = currentNode.Value;
+                    return true;
+                }
+            }
+
+            return DeleteValueRecursiveInternal(node.LeftChild, node, value)
+                || DeleteValueRecursiveInternal(node.RightChild, node, value);
         }
 
 

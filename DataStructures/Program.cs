@@ -9,10 +9,10 @@ namespace DataStructures
     {
         static void Main(string[] args)
         {
-            //ShowBSTTree();
-            //ShowSearches();
+            ShowBSTTree();
+            ShowSearches();
 
-            SumInTree();
+            //SumInTree();
         }
 
         public static void ShowBSTTree()
@@ -76,6 +76,27 @@ namespace DataStructures
             Console.WriteLine("-------Height---------");
             var height = binarySearchTreee.Height(binarySearchTreee.Root);
             Console.WriteLine(height);
+
+            // TODO: it will be greate to creta a tests with all delete cases or improve samples here 1 tree for each case
+            // rather then just use one tree for all
+            Console.WriteLine("-------Delete---------");
+            
+            Console.WriteLine($"Delete when not exists {12}");
+            bool deleteResult = binarySearchTreee.DeleteValueRecursive(12);
+            Console.WriteLine(deleteResult);
+
+            Console.WriteLine($"Delete when exists {4}");
+            deleteResult = binarySearchTreee.DeleteValueRecursive( 4);
+            Console.WriteLine(deleteResult);
+            binarySearchTreee.PrintDpethTreeRecursive(binarySearchTreee.Root);
+
+
+            binarySearchTreee.InsertValueRecursive(4);
+            Console.WriteLine($"Delete when exists {16}");
+            deleteResult = binarySearchTreee.DeleteValueRecursive(16);
+            Console.WriteLine(deleteResult);
+
+            binarySearchTreee.PrintDpethTreeRecursive(binarySearchTreee.Root);
         }
 
         public static void ShowSearches()
@@ -134,30 +155,32 @@ namespace DataStructures
         {
             var hasSet = new Dictionary<int, int>();
 
-            return InOrderTree(root, k, hasSet);
+            return PreOrderTree(root, k, hasSet);
         }
-        public static bool InOrderTree(Node<int> root, int k, Dictionary<int, int> hasSet)
+        public static bool PreOrderTree(Node<int> root, int k, Dictionary<int, int> hasSet)
         {
+            if (root == null)
+            {
+                return false;
+            }
+
             var result = k - root.Value;
-            if (hasSet.TryGetValue(result, out int _))
+            if (hasSet.ContainsKey(result))
             {
                 return true;
             }
             else
             {
-                hasSet.TryAdd(root.Value, root.Value);
+                hasSet.Add(root.Value, root.Value);
             }
 
-            bool isSumExists = false;
+            bool isSumExists = PreOrderTree(root.LeftChild, k, hasSet);
 
-            if (root.LeftChild != null && !isSumExists)
+            // if we node found for the root + left
+            // retrun result for the root + right
+            if (!isSumExists)
             {
-                isSumExists = InOrderTree(root.LeftChild, k, hasSet);
-            }
-
-            if (root.RightChild != null && !isSumExists)
-            {
-                isSumExists = InOrderTree(root.RightChild, k, hasSet); ;
+                isSumExists = PreOrderTree(root.RightChild, k, hasSet);
             }
             return isSumExists;
         }
