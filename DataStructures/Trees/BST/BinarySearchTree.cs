@@ -240,19 +240,31 @@ namespace AlgorithmsAndDataStructures.Trees.BST
                 else
                 {
                     //Find least value in the right sub-tree
-                    var currentNode = node.RightChild;
+                    var leastParentNode = node;
+                    var leastNode = node.RightChild;                    
 
-                    while (currentNode.LeftChild != null)
+                    while (leastNode.LeftChild != null)
                     {
-                        currentNode = currentNode.LeftChild;
+                        leastParentNode = leastNode;
+                        leastNode = leastNode.LeftChild;
                     }
 
-                    // Delete found least value in the right-substree
-                    // since it's leaf value jut run recursion again
-                    DeleteValueRecursiveInternal(Root, null, currentNode.Value);
+                    if (leastParentNode != node)
+                    {
+                        // we fond the least left value in the right sub-tree 
+                        // and assigne it's rights value as a new left child for parent
+                        // the least value itself will be swaped with value for delete and removed
+                        leastParentNode.LeftChild = leastNode.RightChild;                        
+                    }
+                    else
+                    {
+                        //we don't have the left nodes in the right sub-tree, 
+                        // so the least value is the right sub-tree root
+                        leastParentNode.RightChild = leastNode.RightChild;
+                    }                 
 
                     //Swap value
-                    node.Value = currentNode.Value;
+                    node.Value = leastNode.Value;
                     return true;
                 }
             }

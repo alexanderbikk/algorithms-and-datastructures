@@ -30,6 +30,9 @@ namespace DataStructures
             binarySearchTreee.InsertValueRecursive(7);
             binarySearchTreee.InsertValueRecursive(16);
             binarySearchTreee.InsertValueRecursive(19);
+            binarySearchTreee.InsertValueRecursive(15);
+            binarySearchTreee.InsertValueRecursive(17);
+            binarySearchTreee.InsertValueRecursive(18);
             binarySearchTreee.InsertValueRecursive(3);
             binarySearchTreee.InsertValueRecursive(1);
             binarySearchTreee.InsertValueRecursive(9);
