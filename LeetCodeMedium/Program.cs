@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LeetCodeMedium.Trees;
+using System;
 
 namespace LeetCodeMedium
 {
@@ -6,7 +7,17 @@ namespace LeetCodeMedium
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var solution = new Solution();
+
+            
+            var parentArray = new int[] { 1, 5, 5, 2, 2, - 1, 3 };
+            //var parentArray = new int[] { -1, 0, 0, 1, 1, 3, 5 };
+
+            var root = solution.CreateTreeFromParentArray(parentArray, parentArray.Length);
+            
+            solution.LevelOrder(root);
+
+
         }
     }
 }
