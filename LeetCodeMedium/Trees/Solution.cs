@@ -1,9 +1,6 @@
 ﻿using AlgorithmsAndDataStructures.Trees.BST;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LeetCodeMedium.Trees
 {
@@ -16,7 +13,7 @@ namespace LeetCodeMedium.Trees
         /// <param name="parent"></param>
         /// <param name="N"></param>
         /// <returns></returns>
-        public Node<int> CreateTreeFromParentArray(int[] parent, int N)
+        public Node<int> CreateTreeFromParentArrayBFS(int[] parent, int N)
         {
             var rootValue = -1;
 
@@ -49,6 +46,11 @@ namespace LeetCodeMedium.Trees
                 return null;
             }
 
+            return CreateLevelOrderTree(hashTable, rootValue);
+        }
+
+        private Node<int> CreateLevelOrderTree(Dictionary<int, int[]> hashTable, int rootValue)
+        {
             var queue = new Queue<Node<int>>();
             var root = new Node<int>(rootValue);
             queue.Enqueue(root);
@@ -83,6 +85,105 @@ namespace LeetCodeMedium.Trees
             return root;
         }
 
+        public Node<int> CreateTreeFromParentArrayDFS(int[] parent, int N)
+        {
+            var rootValue = -1;
+
+            // constract dictioanry with parent[i] -> {leftValue, rightValue}
+            // leftValue and rightValue are indeces of the given array
+            var hashTable = new Dictionary<int, int[]>();
+            for (var i = 0; i < N; i++)
+            {
+                //find root value
+                if (parent[i] == -1)
+                {
+                    rootValue = i;
+                    continue;
+                }
+
+                // leftValue = i; rightValue  = -1(not exists)
+                var relatedIndexes = new int[2] { i, -1 };
+                // try add value
+                if (!hashTable.TryAdd(parent[i], relatedIndexes))
+                {
+                    // we already have value for left
+                    // add value for right 
+                    // leftValue = parent[0]; rightValue  = parent[1] -> i
+                    relatedIndexes = hashTable[parent[i]];
+                    relatedIndexes[1] = i;
+                }
+            }
+            // no paretn value found;
+            if (rootValue == -1)
+            {
+                return null;
+            }
+
+            return CreatePreOrderTree(hashTable, rootValue);
+        }
+
+        private Node<int> CreatePreOrderTree(Dictionary<int, int[]> hashTable, int rootValue)
+        {
+            var root = new Node<int>(rootValue);
+
+            var isCurrentLevelValuesExists = hashTable.TryGetValue(rootValue, out int[] currentLevelValues);
+
+            // no nodes for the curent level found
+            if (!isCurrentLevelValuesExists)
+            {
+                return root;
+            }
+
+            // we always have left child in children list is not empty
+            root.LeftChild = CreatePreOrderTree(hashTable, currentLevelValues[0]);
+
+            if (currentLevelValues[1] != -1)
+            {
+                root.RightChild = CreatePreOrderTree(hashTable, currentLevelValues[1]);
+            }
+            return root;
+        }
+
+        /// <summary>
+        /// We assume that array ordered by level and missed child contains NULL
+        /// {1, 10, 12, 5, NULL, 7, NULL}
+        /// simple formula to detect children nodes 2 * parentIndex + 1 and 2 * parentIndex + 2
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="rootValue"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        public Node<int> CreatePreOrderTree(int?[] values, int rootValue, int parentIndex)
+        {
+            var root = new Node<int>(rootValue);
+
+            var leftIndex = 2 * parentIndex + 1;
+            // no more nodes to add
+            if (leftIndex >= values.Length)
+            {
+                return root;
+            }
+
+            var leftValue = values[leftIndex];
+            if (leftValue.HasValue)
+            {
+                root.LeftChild = CreatePreOrderTree(values, leftValue.Value, leftIndex);
+            }
+
+            var rightIndex = 2 * parentIndex + 2;
+            // no more nodes to add
+            if (rightIndex >= values.Length)
+            {
+                return root;
+            }
+
+            var rightValue = values[rightIndex];
+            if (rightValue.HasValue)
+            {
+                root.RightChild = CreatePreOrderTree(values, rightValue.Value, rightIndex);
+            }
+            return root;
+        }
 
         public void LevelOrder(Node<int> root)
         {
