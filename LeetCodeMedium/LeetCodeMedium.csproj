@@ -9,8 +9,4 @@
     <ProjectReference Include="..\DataStructures\AlgorithmsAndDataStructures.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Trees\BST\" />
-  </ItemGroup>
-
 </Project>

@@ -9,9 +9,9 @@ namespace LeetCodeMedium
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Binary Tree");
-            BinaryTree();
-            Console.WriteLine();
+            //Console.WriteLine("Binary Tree");
+            //BinaryTree();
+            //Console.WriteLine();
 
             Console.WriteLine("BST");
             BST();
@@ -22,8 +22,21 @@ namespace LeetCodeMedium
         /// Practice with BST
         /// </summary>
         public static void BST()
-        { 
+        {          
 
+            var soulution = new Trees.BST.Solution();
+            var values = new int?[] { 6, 4, 9, 2, 5, 8, 12, null, null, null, null, null, null, 10, 14 };
+            var root = soulution.CreateTreeFromLevelOrderArray(values, 0);
+
+            var result = soulution.FindMaxKthRecursive(root, 3);
+            Console.WriteLine(result);
+
+            Console.WriteLine();
+
+            var count = 0;
+            var target = -1;
+            soulution.RightRootLeft(root, 10, ref count, ref target);
+            Console.WriteLine(target);
         }
 
         /// <summary>
