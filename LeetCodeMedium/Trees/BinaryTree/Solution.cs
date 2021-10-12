@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace LeetCodeMedium.Trees
+namespace LeetCodeMedium.Trees.BinaryTree
 {
     public class Solution
     {
@@ -10,6 +10,7 @@ namespace LeetCodeMedium.Trees
         ///  /// <summary>
         /// Function to construct binary tree from parent array. With simple cycle to set nodes relationship
         /// O(2n) + O(n) extra memory
+        /// See related geek for geeks problem
         /// </summary>
         /// <param name="parent"></param>
         /// <returns></returns>
@@ -55,6 +56,7 @@ namespace LeetCodeMedium.Trees
         /// <summary>
         /// Function to construct binary tree from parent array.
         /// O(2n) + O(n + k) extra memory where k is max nodes per level
+        /// See related geek for geeks problem
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="N"></param>
@@ -165,10 +167,10 @@ namespace LeetCodeMedium.Trees
                 return null;
             }
 
-            return CreatePreOrderTree(hashTable, rootValue);
+            return CreatePreOrderTreeHashTable(hashTable, rootValue);
         }
 
-        private Node<int> CreatePreOrderTree(Dictionary<int, int[]> hashTable, int rootValue)
+        private Node<int> CreatePreOrderTreeHashTable(Dictionary<int, int[]> hashTable, int rootValue)
         {
             var root = new Node<int>(rootValue);
 
@@ -181,11 +183,11 @@ namespace LeetCodeMedium.Trees
             }
 
             // we always have left child in children list is not empty
-            root.LeftChild = CreatePreOrderTree(hashTable, currentLevelValues[0]);
+            root.LeftChild = CreatePreOrderTreeHashTable(hashTable, currentLevelValues[0]);
 
             if (currentLevelValues[1] != -1)
             {
-                root.RightChild = CreatePreOrderTree(hashTable, currentLevelValues[1]);
+                root.RightChild = CreatePreOrderTreeHashTable(hashTable, currentLevelValues[1]);
             }
             return root;
         }
@@ -194,12 +196,13 @@ namespace LeetCodeMedium.Trees
         /// We assume that array ordered by level and missed child contains NULL
         /// {1, 10, 12, 5, NULL, 7, NULL}
         /// simple formula to detect children nodes 2 * parentIndex + 1 and 2 * parentIndex + 2
+        /// See related geek for geeks problem
         /// </summary>
         /// <param name="values"></param>
         /// <param name="rootValue"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public Node<int> CreatePreOrderTree(int?[] values, int rootValue, int parentIndex)
+        public Node<int> CreateTreeFromLevelOrderArray(int?[] values, int rootValue, int parentIndex)
         {
             var root = new Node<int>(rootValue);
 
@@ -213,7 +216,7 @@ namespace LeetCodeMedium.Trees
             var leftValue = values[leftIndex];
             if (leftValue.HasValue)
             {
-                root.LeftChild = CreatePreOrderTree(values, leftValue.Value, leftIndex);
+                root.LeftChild = CreateTreeFromLevelOrderArray(values, leftValue.Value, leftIndex);
             }
 
             var rightIndex = 2 * parentIndex + 2;
@@ -226,12 +229,17 @@ namespace LeetCodeMedium.Trees
             var rightValue = values[rightIndex];
             if (rightValue.HasValue)
             {
-                root.RightChild = CreatePreOrderTree(values, rightValue.Value, rightIndex);
+                root.RightChild = CreateTreeFromLevelOrderArray(values, rightValue.Value, rightIndex);
             }
             return root;
         }
 
-
+        /// <summary>
+        /// The idea just store all parent -> children in hash table and then canculate the height ofthe tree suing DFS
+        /// See related geek for geeks problem
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <returns></returns>
         public int CalculateTreeHeightFromParentArray(int[] parent)
         {
             var rootValue = -1;
