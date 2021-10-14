@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace LeetCodeMedium.Trees
+namespace AlgorithmsAndDataStructures.Trees
 {
     public static class TreeHelpers
     {

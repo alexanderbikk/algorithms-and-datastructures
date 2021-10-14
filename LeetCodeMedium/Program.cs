@@ -1,4 +1,5 @@
-﻿using LeetCodeMedium.Trees;
+﻿using AlgorithmsAndDataStructures.Trees;
+using LeetCodeMedium.Trees;
 using LeetCodeMedium.Trees.BinaryTree;
 using System;
 
@@ -61,6 +62,13 @@ namespace LeetCodeMedium
             result = solution.IsSymetricTree(root);
             Console.WriteLine(result);
             Console.WriteLine();
+
+
+            values = new int?[] { 1, 2, 2, 3, null, null, 3, 4, null, null, 4 };
+
+            root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
+            TreeHelpers.LevelOrder(root);
+            
         }
 
 
