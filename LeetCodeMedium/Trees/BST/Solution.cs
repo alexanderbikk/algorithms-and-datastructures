@@ -66,24 +66,6 @@ namespace LeetCodeMedium.Trees.BST
             }
             RightRootLeft(root.LeftChild, k, ref count, ref target);
         }
-
-        public Node<int> CreateTreeFromLevelOrderArray(int?[] values, int parentIndex)
-        {
-            // no more nodes to add or current node is null
-            if (parentIndex >= values.Length || values[parentIndex] == null)
-            {
-                return null;
-            }
-
-            var root = new Node<int>(values[parentIndex].Value);
-
-            var leftIndex = 2 * parentIndex + 1;
-            root.LeftChild = CreateTreeFromLevelOrderArray(values, leftIndex);
-
-            var rightIndex = 2 * parentIndex + 2;
-            root.RightChild = CreateTreeFromLevelOrderArray(values, rightIndex);
-
-            return root;
-        }
+       
     }
 }

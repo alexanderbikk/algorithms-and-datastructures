@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace LeetCodeMedium.Trees.BinaryTree
 {
-    public class Solution
+    public class TreeFromParentArraySolution
     {
         /// <summary>
         ///  /// <summary>
@@ -190,49 +190,7 @@ namespace LeetCodeMedium.Trees.BinaryTree
                 root.RightChild = CreatePreOrderTreeHashTable(hashTable, currentLevelValues[1]);
             }
             return root;
-        }
-
-        /// <summary>
-        /// We assume that array ordered by level and missed child contains NULL
-        /// {1, 10, 12, 5, NULL, 7, NULL}
-        /// simple formula to detect children nodes 2 * parentIndex + 1 and 2 * parentIndex + 2
-        /// See related geek for geeks problem
-        /// </summary>
-        /// <param name="values"></param>
-        /// <param name="rootValue"></param>
-        /// <param name="height"></param>
-        /// <returns></returns>
-        public Node<int> CreateTreeFromLevelOrderArray(int?[] values, int rootValue, int parentIndex)
-        {
-            var root = new Node<int>(rootValue);
-
-            var leftIndex = 2 * parentIndex + 1;
-            // no more nodes to add
-            if (leftIndex >= values.Length)
-            {
-                return root;
-            }
-
-            var leftValue = values[leftIndex];
-            if (leftValue.HasValue)
-            {
-                root.LeftChild = CreateTreeFromLevelOrderArray(values, leftValue.Value, leftIndex);
-            }
-
-            var rightIndex = 2 * parentIndex + 2;
-            // no more nodes to add
-            if (rightIndex >= values.Length)
-            {
-                return root;
-            }
-
-            var rightValue = values[rightIndex];
-            if (rightValue.HasValue)
-            {
-                root.RightChild = CreateTreeFromLevelOrderArray(values, rightValue.Value, rightIndex);
-            }
-            return root;
-        }
+        }        
 
         /// <summary>
         /// The idea just store all parent -> children in hash table and then canculate the height ofthe tree suing DFS
@@ -294,29 +252,6 @@ namespace LeetCodeMedium.Trees.BinaryTree
             }
 
             return Math.Max(leftHeight, rightHeight) + 1;
-        }
-
-        public void LevelOrder(Node<int> root)
-        {
-            var queue = new Queue<Node<int>>();
-            queue.Enqueue(root);
-
-            while (queue.Count != 0)
-            {
-                var currentNode = queue.Dequeue();
-                Console.Write(currentNode.Value + " ");
-
-                if (currentNode.LeftChild != null)
-                {
-                    queue.Enqueue(currentNode.LeftChild);
-                }
-
-                if (currentNode.RightChild != null)
-                {
-                    queue.Enqueue(currentNode.RightChild);
-                }
-            }
-            Console.WriteLine();
-        }
+        }       
     }
 }
