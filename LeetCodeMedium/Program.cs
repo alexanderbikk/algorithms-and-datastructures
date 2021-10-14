@@ -35,7 +35,7 @@ namespace LeetCodeMedium
 
             var count = 0;
             var target = -1;
-            soulution.RightRootLeft(root, 10, ref count, ref target);
+            soulution.RightRootLeft(root, 3, ref count, ref target);
             Console.WriteLine(target);
         }
 
