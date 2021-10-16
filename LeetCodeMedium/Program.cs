@@ -1,5 +1,4 @@
 ﻿using AlgorithmsAndDataStructures.Trees;
-using LeetCodeMedium.Trees;
 using LeetCodeMedium.Trees.BinaryTree;
 using System;
 
@@ -31,6 +30,7 @@ namespace LeetCodeMedium
             var values = new int?[] { 6, 4, 9, 2, 5, 8, 12, null, null, null, null, null, null, 10, 14 };
             var root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
 
+            Console.WriteLine("Find kth max in BST");
             var result = soulution.FindMaxKthRecursive(root, 3);
             Console.WriteLine(result);
 
@@ -38,8 +38,18 @@ namespace LeetCodeMedium
 
             var count = 0;
             var target = -1;
+            Console.WriteLine("Find kth max in without return from left subtree BST");
             soulution.RightRootLeft(root, 3, ref count, ref target);
             Console.WriteLine(target);
+
+            values = new int?[] { 1, null, 2, null, null, null, 3, null, null, null, null, null, null, null, 4 };
+            root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
+
+            Console.WriteLine();
+            Console.WriteLine("Balance BST");
+            root = soulution.BalanceBST(root);
+            TreeHelpers.LevelOrder(root);
+            Console.WriteLine();
         }
 
         public static void CommonBinaryTree()
@@ -68,7 +78,7 @@ namespace LeetCodeMedium
 
             root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
             TreeHelpers.LevelOrder(root);
-            
+
         }
 
 
