@@ -1,4 +1,6 @@
 ﻿using AlgorithmsAndDataStructures.Searches;
+using AlgorithmsAndDataStructures.Trees;
+using AlgorithmsAndDataStructures.Trees.AVL;
 using AlgorithmsAndDataStructures.Trees.BST;
 using System;
 using System.Collections.Generic;
@@ -9,10 +11,11 @@ namespace DataStructures
     {
         static void Main(string[] args)
         {
-            ShowBSTTree();
-            ShowSearches();
+            //ShowBSTTree();
+            //ShowSearches();
 
             //SumInTree();
+            AVLTree();
         }
 
         public static void ShowBSTTree()
@@ -136,6 +139,26 @@ namespace DataStructures
             Console.WriteLine($"Trget {target} Result position {pos}");
         }
 
+
+
+
+        public static void AVLTree()
+        {
+            var avlTree = new AVLTree(20);
+            avlTree.InsertValue(10);
+            avlTree.InsertValue(25);
+            avlTree.InsertValue(15);
+            avlTree.InsertValue(9);
+            avlTree.InsertValue(22);
+            avlTree.InsertValue(30);
+
+            avlTree.PrintInOrder(avlTree.Root);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            TreeHelpers.LevelOrder(avlTree.Root);
+
+        }
 
         /// <summary>
         /// TODO move to LeetCode easy and use tree structure there
