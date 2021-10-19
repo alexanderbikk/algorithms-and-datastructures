@@ -139,18 +139,18 @@ namespace DataStructures
             Console.WriteLine($"Trget {target} Result position {pos}");
         }
 
-
-
-
         public static void AVLTree()
         {
-            var avlTree = new AVLTree(20);
-            avlTree.InsertValue(10);
-            avlTree.InsertValue(25);
+            var avlTree = new AVLTree(10);
+            avlTree.InsertValue(7);
             avlTree.InsertValue(15);
             avlTree.InsertValue(9);
-            avlTree.InsertValue(22);
-            avlTree.InsertValue(30);
+            avlTree.InsertValue(6);
+            //LL
+            avlTree.InsertValue(3);
+            //LR
+            //avlTree.InsertValue(8);
+
 
             avlTree.PrintInOrder(avlTree.Root);
             Console.WriteLine();
