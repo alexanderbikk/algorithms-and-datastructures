@@ -23,7 +23,7 @@ namespace AlgorithmsAndDataStructures.Trees.AVL
             Root = InsertValueInternal(Root, value);
         }
 
-        public AVLNode InsertValueInternal(AVLNode root, int value)
+        private AVLNode InsertValueInternal(AVLNode root, int value)
         {
             if (root == null)
             {
@@ -47,7 +47,7 @@ namespace AlgorithmsAndDataStructures.Trees.AVL
             {
                 //left heavy
                 if (value > root.LeftChild.Value)
-                {                    
+                {
                     Console.WriteLine("Left heavy. Left Right case");
                     return RotateLeftRight(root);
                 }
@@ -74,7 +74,96 @@ namespace AlgorithmsAndDataStructures.Trees.AVL
 
             return root;
         }
-       
+
+        public void DeleteValue(int value)
+        {
+            Root = DeleteValueInternal(Root, value);
+        }
+
+        private AVLNode DeleteValueInternal(AVLNode root, int value)
+        {
+            if (root == null)
+            {
+                return root;
+            }
+
+            if (value > root.Value)
+            {
+                root.RightChild = DeleteValueInternal(root.RightChild, value);
+            }
+            else if (value < root.Value)
+            {
+                root.LeftChild = DeleteValueInternal(root.LeftChild, value);
+            }
+            else
+            {
+                //we found the value for deletion
+                if (root.LeftChild == null && root.RightChild == null)
+                {
+                    //leaf node just delete it
+                    return null;
+                }
+                else if (root.LeftChild == null)
+                {
+                    // ahs only right child
+                    root = root.RightChild;
+                }
+                else if (root.RightChild == null)
+                {
+                    //has only right child
+                    root = root.LeftChild;
+                }
+                else
+                {
+                    //has both children                    
+                    var leastRightNode = root.RightChild;
+
+                    // find lease left node in right sub-tree
+                    while (leastRightNode.LeftChild != null)
+                    {                        
+                        leastRightNode = leastRightNode.LeftChild;
+                    }
+
+                    // replace with least value in right-subtree 
+                    root.Value = leastRightNode.Value;
+                    // call to delete least child in right-subtree and recalculate hights for all ancestors
+                    root.RightChild = DeleteValueInternal(root.RightChild, leastRightNode.Value);                    
+                }
+            }
+
+            // calculate height and balance factor
+            root.Height = CalculateHeight(root.LeftChild, root.RightChild);
+
+            var balanceFactor = GetBalanceFactor(root);
+
+            // left heavy -> right rotations
+            if (balanceFactor > 1 && GetBalanceFactor(root.LeftChild) >= 0)
+            {
+                //R0 & R1 rotations
+                return RotateRight(root);
+            }
+
+            if (balanceFactor > 1 && GetBalanceFactor(root.LeftChild) < 0)
+            {
+                //R-1 rotation
+                return RotateLeftRight(root);
+            }
+
+            // right heavy -> left rotations
+            if (balanceFactor < -1 && GetBalanceFactor(root.RightChild) <= 0)
+            {
+                //L0 & L-1 rotations
+                return RotateLeft(root);
+            }
+            if (balanceFactor < -1 && GetBalanceFactor(root.RightChild) > 0)
+            {
+                //L1 rotations
+                return RotateRightLeft(root);                
+            }
+
+            return root; 
+        }
+
         private int GetHeight(AVLNode node)
         {
             if (node == null)
@@ -138,12 +227,12 @@ namespace AlgorithmsAndDataStructures.Trees.AVL
         /// <param name="node"></param>
         /// <returns></returns>
         private AVLNode RotateLeftRight(AVLNode node)
-        { 
+        {
             // do simple left rotation for C and G
             node.LeftChild = RotateLeft(node.LeftChild);
 
             // do simple right rotation for U and G
-           return RotateRight(node);            
+            return RotateRight(node);
         }
 
         /// <summary>

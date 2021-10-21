@@ -157,7 +157,35 @@ namespace DataStructures
             Console.WriteLine();
 
             TreeHelpers.LevelOrder(avlTree.Root);
+            Console.WriteLine();
+            Console.WriteLine();
 
+            var avlTreeDelete = new AVLTree(50);
+
+            avlTreeDelete.InsertValue(70);
+            avlTreeDelete.InsertValue(30);
+
+            avlTreeDelete.InsertValue(20);
+            avlTreeDelete.InsertValue(35);            
+            avlTreeDelete.InsertValue(55);
+            avlTreeDelete.InsertValue(80);
+            
+            avlTreeDelete.InsertValue(10);
+            avlTreeDelete.InsertValue(51);
+            avlTreeDelete.InsertValue(75);
+            avlTreeDelete.InsertValue(90);
+
+            avlTreeDelete.InsertValue(72);
+            avlTreeDelete.InsertValue(92);
+
+            TreeHelpers.LevelOrder(avlTreeDelete.Root);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            avlTreeDelete.DeleteValue(70);            
+            TreeHelpers.LevelOrder(avlTreeDelete.Root);
+            Console.WriteLine();
+            Console.WriteLine();
         }
 
         /// <summary>
