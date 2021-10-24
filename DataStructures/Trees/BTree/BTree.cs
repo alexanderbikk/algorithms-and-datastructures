@@ -2,6 +2,10 @@
 
 namespace AlgorithmsAndDataStructures.Trees.BTree
 {
+    /// <summary>
+    /// Good implementation
+    /// https://github.com/rsdcastro/btree-dotnet/blob/dc8448ff57101fdc71cbf04d5644f22430d33b5d/BTree/BTree.cs#L336
+    /// </summary>
     public class BTree
     {
         // minimum degree oder t >=2
