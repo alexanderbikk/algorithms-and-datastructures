@@ -2,6 +2,7 @@
 using AlgorithmsAndDataStructures.Trees;
 using AlgorithmsAndDataStructures.Trees.AVL;
 using AlgorithmsAndDataStructures.Trees.BST;
+using AlgorithmsAndDataStructures.Trees.BTree;
 using System;
 using System.Collections.Generic;
 
@@ -15,7 +16,61 @@ namespace DataStructures
             //ShowSearches();
 
             //SumInTree();
-            AVLTree();
+            //AVLTree();
+
+            BTree();
+        }
+
+        public static void BTree()
+        {
+            // create 2-3-4 tree
+            var btree = new BTree(2);
+
+            Console.WriteLine("Insert");
+            btree.Insert(1);
+            btree.Insert(3);
+            btree.Insert(2);
+            
+            // split root
+            btree.Insert(4);
+            btree.Insert(5);
+
+            // split leaf
+            btree.Insert(6);
+            btree.Insert(7);
+            
+
+            // split leaf
+            btree.Insert(8);
+
+            // root is full split
+            btree.Insert(9);
+
+            btree.Insert(10);
+            btree.Insert(11);
+            btree.Insert(12);
+
+            // split non-leaf since we split before go to next level - unnesesary split
+            btree.Insert(13);
+
+            Console.WriteLine("Insert completed");
+
+            Console.WriteLine();
+            Console.WriteLine("Traverse");
+            btree.Traverse();
+
+            Console.WriteLine();
+            Console.WriteLine("Seach");
+            var target = 4;
+            var resultNode = btree.Search(target);
+            if (resultNode == null)
+            {
+                Console.WriteLine($"Target : {target} not found");
+            }
+            else
+            {
+                Console.WriteLine(resultNode.Keys.Find(x => x == target));
+            }
         }
 
         public static void ShowBSTTree()
@@ -86,13 +141,13 @@ namespace DataStructures
             // TODO: it will be greate to creta a tests with all delete cases or improve samples here 1 tree for each case
             // rather then just use one tree for all
             Console.WriteLine("-------Delete---------");
-            
+
             Console.WriteLine($"Delete when not exists {12}");
             bool deleteResult = binarySearchTreee.DeleteValueRecursive(12);
             Console.WriteLine(deleteResult);
 
             Console.WriteLine($"Delete when exists {4}");
-            deleteResult = binarySearchTreee.DeleteValueRecursive( 4);
+            deleteResult = binarySearchTreee.DeleteValueRecursive(4);
             Console.WriteLine(deleteResult);
             binarySearchTreee.PrintDpethTreeRecursive(binarySearchTreee.Root);
 
@@ -166,10 +221,10 @@ namespace DataStructures
             avlTreeDelete.InsertValue(30);
 
             avlTreeDelete.InsertValue(20);
-            avlTreeDelete.InsertValue(35);            
+            avlTreeDelete.InsertValue(35);
             avlTreeDelete.InsertValue(55);
             avlTreeDelete.InsertValue(80);
-            
+
             avlTreeDelete.InsertValue(10);
             avlTreeDelete.InsertValue(51);
             avlTreeDelete.InsertValue(75);
@@ -182,7 +237,7 @@ namespace DataStructures
             Console.WriteLine();
             Console.WriteLine();
 
-            avlTreeDelete.DeleteValue(70);            
+            avlTreeDelete.DeleteValue(70);
             TreeHelpers.LevelOrder(avlTreeDelete.Root);
             Console.WriteLine();
             Console.WriteLine();
@@ -194,7 +249,7 @@ namespace DataStructures
         public static void SumInTree()
         {
             var binarySearchTreee = new BinarySearchTree<int>(2);
-            binarySearchTreee.InsertValueRecursive(1);            
+            binarySearchTreee.InsertValueRecursive(1);
             binarySearchTreee.InsertValueRecursive(3);
             //binarySearchTreee.InsertValueRecursive(2);
             //binarySearchTreee.InsertValueRecursive(4);
