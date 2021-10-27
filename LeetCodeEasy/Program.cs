@@ -38,11 +38,32 @@ namespace LeetCodeEasy
             values = new int?[] { 3, 9, 20, null, null, 15, 7 };
             root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
             TreeHelpers.LevelOrder(root);
-            
+
             count = 0;
             result = solution.IsBalancedOptimized(root);
             Console.WriteLine(result);
             Console.WriteLine();
+
+
+            values = new int?[] { 1, 2, null,3, null,null,null };
+            root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
+            TreeHelpers.LevelOrder(root);
+            
+            // revert tree
+            root = solution.InvertTree(root);
+            TreeHelpers.LevelOrder(root);
+
+            // revert back
+            root = solution.InvertTree(root);
+            TreeHelpers.LevelOrder(root);
+
+
+
+            values = new int?[] { 4,2,3,1,2,1,2 };
+            root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
+            TreeHelpers.LevelOrder(root);
+
+            var list = solution.PreorderTraversal(root);
 
         }
 

@@ -1,5 +1,6 @@
 ﻿using AlgorithmsAndDataStructures.Trees.BST;
 using System;
+using System.Collections.Generic;
 
 namespace LeetCodeEasy.Trees.BinaryTree
 {
@@ -81,7 +82,94 @@ namespace LeetCodeEasy.Trees.BinaryTree
                 // as we normaly do when calulating only tree height
                 _height = Math.Max(leftHeight, rightHeight) + 1;
                 return true;
-            }       
+            }
         }
+
+
+        /// <summary>
+        /// Just simply invert each subtree from bottom to up. Finally all tree will be inverted
+        /// Same algorithm as fro ISSymetryc tree could be used see LeetCode implementation. But ref required and code more complex
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public Node<int> InvertTree(Node<int> root)
+        {
+            if (root == null)
+            {
+                return null;
+            }
+
+            var right = InvertTree(root.RightChild);
+            var left = InvertTree(root.LeftChild);
+
+            root.LeftChild = right;
+            root.RightChild = left;
+
+            return root;
+        }
+
+        /// <summary>
+        /// Just simply envert each sub-tree from top to bottom. Finally all tree will be reverted
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public Node<int> InvertTreeIterative(Node<int> root)
+        {
+            var queue = new Queue<Node<int>>();
+            queue.Enqueue(root);
+
+            while (queue.Count != 0)
+            {
+                var current = queue.Dequeue();
+                // invert children for current level
+                var temp = current.LeftChild;
+                current.LeftChild = current.RightChild;
+                current.RightChild = temp;
+
+                // enqueue children to continu traversing
+                if (current.LeftChild != null)
+                {
+                    queue.Enqueue(current.LeftChild);
+                }
+
+                if (current.RightChild != null)
+                {
+                    queue.Enqueue(current.RightChild);
+                }
+            }
+            return root;
+        }
+
+
+        public IList<int> PreorderTraversal(Node<int> root)
+        {
+            var nodes = new List<int>();
+            if (root == null)
+            {
+                return nodes;
+            }
+
+            var stack = new Stack<Node<int>>();
+            
+            stack.Push(root);
+            
+            var current = root;
+            while (stack.Count != 0 )
+            {
+                current = stack.Pop();
+                nodes.Add(current.Value);
+                if (current.LeftChild != null)
+                {
+                    stack.Push(current.LeftChild);
+                }
+                if (current.RightChild != null)
+                {
+                    stack.Push(current.RightChild);
+                }
+
+            }
+            return nodes;
+        }
+
     }
 }
