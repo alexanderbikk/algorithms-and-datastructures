@@ -15,9 +15,9 @@ namespace LeetCodeMedium
             //TreeFromParentArray();
             //Console.WriteLine();
 
-            Console.WriteLine("BST");
-            BST();
-            Console.WriteLine();
+            //Console.WriteLine("BST");
+            //BST();
+            //Console.WriteLine();
         }
 
         /// <summary>
@@ -30,7 +30,8 @@ namespace LeetCodeMedium
             var values = new int?[] { 6, 4, 9, 2, 5, 8, 12, null, null, null, null, null, null, 10, 14 };
             var root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
 
-            Console.WriteLine("Find kth max in BST");
+            Console.WriteLine("Find kth max in BST - DFS for Right to Root and Left until count is not equeal to k. " +
+                "Return when foud to avoid unnesesary traversal");
             var result = soulution.FindMaxKthRecursive(root, 3);
             Console.WriteLine(result);
 
@@ -46,7 +47,7 @@ namespace LeetCodeMedium
             root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
 
             Console.WriteLine();
-            Console.WriteLine("Balance BST");
+            Console.WriteLine("Balance BST - convert to array then build from array using mid pos and divide left and right sub-tree by 2");
             root = soulution.BalanceBST(root);
             TreeHelpers.LevelOrder(root);
             Console.WriteLine();
@@ -54,7 +55,11 @@ namespace LeetCodeMedium
 
         public static void CommonBinaryTree()
         {
+
             var solution = new CommonSolution();
+
+            Console.WriteLine("Is Symetric Tree - Compare left and right subtree");
+
             var values = new int?[] { 1, 2, 2, 3, 4, 4, 3, 5, 6, 7, 8, 8, 7, 6, 5 };
             var root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
             TreeHelpers.LevelOrder(root);
@@ -74,11 +79,22 @@ namespace LeetCodeMedium
             Console.WriteLine();
 
 
-            values = new int?[] { 1, 2, 2, 3, null, null, 3, 4, null, null, 4 };
+            Console.WriteLine("Complete Binary tree insertor. O(1) for insert - " +
+                "store last not completed level on creation and then insert will be O(1) but createion O(n)");
+            Console.WriteLine("Another solution insert using Level Order traversal so insert will be O(n) but creation O(1)");
+
+            values = new int?[] { 2, 3, 4, 5, null, null, null };
 
             root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
             TreeHelpers.LevelOrder(root);
 
+            var cbtInserter = new CBTInserter(root);
+            cbtInserter.Insert(7);
+            cbtInserter.Insert(8);
+            cbtInserter.Insert(9);
+            cbtInserter.Insert(10);
+
+            TreeHelpers.LevelOrder(cbtInserter.Get_root());
         }
 
 

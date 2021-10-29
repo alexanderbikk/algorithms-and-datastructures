@@ -9,8 +9,8 @@ namespace LeetCodeEasy
     {
         static void Main(string[] args)
         {
-            //Arrays();
-            CommonBinaryTree();
+            Arrays();
+            //CommonBinaryTree();
         }
 
         public static void CommonBinaryTree()
@@ -65,6 +65,10 @@ namespace LeetCodeEasy
 
             var list = solution.PreorderTraversal(root);
 
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine(list[i] + " ");
+            }
         }
 
         static void Arrays()
@@ -82,6 +86,14 @@ namespace LeetCodeEasy
             target = 9;
             result = solution.TwoSumSorted(nums, target);
             Console.WriteLine(result[0] + " " + result[1]);
+
+
+            nums = new int[] { 2, 0, 1};
+            solution.SortColors(nums);
+            for (int i = 0; i < nums.Length; i++)
+            {
+                Console.Write(nums[i] + " ");
+            }
         }
 
     }

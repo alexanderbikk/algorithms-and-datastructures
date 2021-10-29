@@ -62,5 +62,52 @@ namespace LeetCodeEasy.Arrays
             }
             return null;
         }
+
+
+        public void SortColors(int[] nums)
+        {
+            var redCount = 0;
+            var whiteCount = 0;
+            var blueCount = 0;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] == 0)
+                {
+                    redCount++;
+                }
+                else if (nums[i] == 1)
+                {
+                    whiteCount++;
+                }
+                else if (nums[i] == 2)
+                {
+                    blueCount++;
+                }              
+
+            }
+
+            for (int i = 0; i < nums.Length;)
+            {
+                while (redCount != 0)
+                {
+                    nums[i] = 0;
+                    redCount--;
+                    i++;
+                }
+                while (whiteCount != 0)
+                {
+                    nums[i] = 1;
+                    whiteCount--;
+                    i++;
+                }
+                while (blueCount != 0)
+                {
+                    nums[i] = 2;
+                    blueCount--;
+                    i++;
+                }
+            }
+        }
     }
 }
