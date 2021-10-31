@@ -9,8 +9,8 @@ namespace LeetCodeEasy
     {
         static void Main(string[] args)
         {
-            Arrays();
-            //CommonBinaryTree();
+            //Arrays();
+            CommonBinaryTree();
         }
 
         public static void CommonBinaryTree()
@@ -57,17 +57,23 @@ namespace LeetCodeEasy
             root = solution.InvertTree(root);
             TreeHelpers.LevelOrder(root);
 
-
-
-            values = new int?[] { 4,2,3,1,2,1,2 };
+            values = new int?[] { 4,2,3,1,2,5,6 };
             root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
             TreeHelpers.LevelOrder(root);
 
-            var list = solution.PreorderTraversal(root);
+            var list = solution.PreorderTraversalStack(root);
 
             for (int i = 0; i < list.Count; i++)
             {
-                Console.WriteLine(list[i] + " ");
+                Console.Write(list[i] + " ");
+            }
+
+            Console.WriteLine();
+
+            list = solution.InOrderTraversalStack(root);
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.Write(list[i] + " ");
             }
         }
 

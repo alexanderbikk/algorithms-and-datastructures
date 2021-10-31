@@ -141,7 +141,7 @@ namespace LeetCodeEasy.Trees.BinaryTree
         }
 
 
-        public IList<int> PreorderTraversal(Node<int> root)
+        public IList<int> PreorderTraversalStack(Node<int> root)
         {
             var nodes = new List<int>();
             if (root == null)
@@ -150,23 +150,51 @@ namespace LeetCodeEasy.Trees.BinaryTree
             }
 
             var stack = new Stack<Node<int>>();
-            
+
             stack.Push(root);
-            
+
             var current = root;
-            while (stack.Count != 0 )
+            while (stack.Count != 0)
             {
                 current = stack.Pop();
                 nodes.Add(current.Value);
-                if (current.LeftChild != null)
-                {
-                    stack.Push(current.LeftChild);
-                }
+
                 if (current.RightChild != null)
                 {
                     stack.Push(current.RightChild);
                 }
 
+                if (current.LeftChild != null)
+                {
+                    stack.Push(current.LeftChild);
+                }
+            }
+            return nodes;
+        }
+
+        public IList<int> InOrderTraversalStack(Node<int> root)
+        {
+            var nodes = new List<int>();
+            if (root == null)
+            {
+                return nodes;
+            }
+
+            var stack = new Stack<Node<int>>();
+
+            while (stack.Count != 0 || root != null)
+            {
+                if (root != null)
+                {
+                    stack.Push(root);
+                    root = root.LeftChild;
+                }
+                else
+                {
+                    root = stack.Pop();
+                    nodes.Add(root.Value);
+                    root = root.RightChild;
+                }               
             }
             return nodes;
         }
