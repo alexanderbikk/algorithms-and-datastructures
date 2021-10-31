@@ -1,4 +1,5 @@
-﻿using AlgorithmsAndDataStructures.Searches;
+﻿using AlgorithmsAndDataStructures.LinkedList;
+using AlgorithmsAndDataStructures.Searches;
 using AlgorithmsAndDataStructures.Trees;
 using AlgorithmsAndDataStructures.Trees.AVL;
 using AlgorithmsAndDataStructures.Trees.BST;
@@ -12,13 +13,98 @@ namespace DataStructures
     {
         static void Main(string[] args)
         {
+            LinkedList();
+
             //ShowBSTTree();
             //ShowSearches();
 
             //SumInTree();
             //AVLTree();
 
-            BTree();
+            //BTree();
+        }
+
+        public static void LinkedList()
+        {
+            var linkedList = new LinkedList();
+            Console.WriteLine(linkedList.IsEmpty);
+            linkedList.PrintList();
+            Console.WriteLine();
+
+
+            Console.WriteLine("Insert at head");
+            linkedList.InsertAtHead(1);
+            linkedList.InsertAtHead(2);
+            linkedList.InsertAtHead(3);
+
+            linkedList.PrintList();
+            Console.WriteLine();
+
+            Console.WriteLine("Insert at tail");
+
+            linkedList = new LinkedList();
+
+            linkedList.InsertAtTail(10);
+            linkedList.InsertAtTail(20);
+            linkedList.InsertAtHead(1);
+
+            linkedList.PrintList();
+            Console.WriteLine();
+
+
+            Console.WriteLine("Insert after Node");
+
+            linkedList = new LinkedList();
+
+            var node = new Node(10);
+            linkedList.InsertAtHead(node);
+            linkedList.InsertAtHead(new Node(20));
+
+            linkedList.InsertAfter(node, 15);
+            linkedList.InsertAfter(node, 17);
+
+
+            linkedList.PrintList();
+            Console.WriteLine();
+
+            Console.WriteLine("Search");
+
+            var result = linkedList.Search(15);
+            Console.WriteLine(result);
+
+
+            result = linkedList.Search(20);
+            Console.WriteLine(result);
+
+            result = linkedList.Search(17);
+            Console.WriteLine(result);
+
+            result = linkedList.Search(18);
+            Console.WriteLine(result);
+            Console.WriteLine();
+
+            Console.WriteLine("Length");
+
+            var length = linkedList.Length();
+            Console.WriteLine(length);
+            Console.WriteLine();
+
+            Console.WriteLine("Reverse");
+
+            linkedList.Reverse();
+            linkedList.Reverse();
+
+            Console.WriteLine("Delete");
+            linkedList.Delete(10);
+            // not exists
+            linkedList.Delete(18);
+            linkedList.Delete(17);
+            linkedList.Delete(15);
+            // delete head
+            linkedList.Delete(20);
+
+            linkedList.PrintList();
+            Console.WriteLine();
         }
 
         public static void BTree()
@@ -30,7 +116,7 @@ namespace DataStructures
             btree.Insert(1);
             btree.Insert(3);
             btree.Insert(2);
-            
+
             // split root
             btree.Insert(4);
             btree.Insert(5);
@@ -38,7 +124,7 @@ namespace DataStructures
             // split leaf
             btree.Insert(6);
             btree.Insert(7);
-            
+
 
             // split leaf
             btree.Insert(8);
@@ -242,6 +328,9 @@ namespace DataStructures
             Console.WriteLine();
             Console.WriteLine();
         }
+
+
+
 
         /// <summary>
         /// TODO move to LeetCode easy and use tree structure there
