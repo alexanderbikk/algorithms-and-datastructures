@@ -95,6 +95,27 @@ namespace LeetCodeMedium
             cbtInserter.Insert(10);
 
             TreeHelpers.LevelOrder(cbtInserter.Get_root());
+
+
+            values = new int?[] { 1, 2, 3, null, null, 4, 6, null, null, null, null, null, 5, null, null };
+
+            root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
+            TreeHelpers.LevelOrder(root);
+
+            var leftList = solution.LeftView(root);
+            foreach (var item in leftList)
+            {
+                Console.Write(item + " ");
+            }
+
+            Console.WriteLine();
+
+            leftList = solution.LeftViewRecursion(root);
+            foreach (var item in leftList)
+            {
+                Console.Write(item + " ");
+            }
+
         }
 
 

@@ -1,5 +1,4 @@
 ﻿using AlgorithmsAndDataStructures.Trees.BST;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace LeetCodeMedium.Trees.BinaryTree
@@ -56,7 +55,7 @@ namespace LeetCodeMedium.Trees.BinaryTree
 
             queue.Enqueue(root.LeftChild);
             queue.Enqueue(root.RightChild);
-            
+
 
             while (queue.Count != 0)
             {
@@ -64,8 +63,8 @@ namespace LeetCodeMedium.Trees.BinaryTree
                 var rootR = queue.Dequeue();
 
                 if (rootL == null && rootR == null)
-                {                   
-                    continue;                    
+                {
+                    continue;
                 }
 
                 var isRootEquals = rootL?.Value == rootR?.Value;
@@ -101,7 +100,7 @@ namespace LeetCodeMedium.Trees.BinaryTree
 
             var stack = new Stack<Node<int>>();
 
-           
+
             stack.Push(root.RightChild);
             stack.Push(root.LeftChild);
 
@@ -121,16 +120,79 @@ namespace LeetCodeMedium.Trees.BinaryTree
                     return false;
                 }
                 else
-                {                    
+                {
                     stack.Push(rootR.LeftChild);
                     stack.Push(rootL.RightChild);
 
                     stack.Push(rootR.RightChild);
-                    stack.Push(rootL.LeftChild);                    
+                    stack.Push(rootL.LeftChild);
                 }
             }
 
             return true;
+        }
+
+
+        public List<int> LeftView(Node<int> root)
+        {
+            var list = new List<int>();
+            if (root == null)
+            {
+                return list;
+            }
+
+            var queue = new Queue<Node<int>>();
+
+            queue.Enqueue(root);
+
+            while (queue.Count != 0)
+            {
+                var queueCurrentCount = queue.Count;
+                for (int i = 0; i < queueCurrentCount; i++)
+                {
+                    var current = queue.Dequeue();
+                    if (i == 0)
+                    {
+                        list.Add(current.Value);
+                    }
+
+                    if (current.LeftChild != null)
+                    {
+                        queue.Enqueue(current.LeftChild);
+                    }
+
+                    if (current.RightChild != null)
+                    {
+                        queue.Enqueue(current.RightChild);
+                    }
+                }
+            }
+            return list;
+        }
+
+        private int maxLevel = 0;
+        private List<int> _list = new List<int>();
+        public List<int> LeftViewRecursion(Node<int> root)
+        {
+            LeftViewRecursionInternal(root, 1);
+            return _list;
+        }
+
+        public void LeftViewRecursionInternal(Node<int> root, int level)
+        {
+            if (root == null)
+            {
+                return;
+            }
+
+            if (level > maxLevel)
+            {
+                _list.Add(root.Value);
+                maxLevel = level;
+            }
+            
+            LeftViewRecursionInternal(root.LeftChild, level + 1);
+            LeftViewRecursionInternal(root.RightChild, level + 1);            
         }
     }
 }
