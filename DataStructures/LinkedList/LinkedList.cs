@@ -134,32 +134,96 @@ namespace AlgorithmsAndDataStructures.LinkedList
         {
             if (IsEmpty)
             {
-                PrintList();
                 return;
             }
 
-
-
-            Node tempPrevious = null;
+            Node previous = null;
             var temp = _head;
             Node next = null;
 
             while (temp != null)
             {
-                // store original next
+                // store next for further traversal
                 next = temp.Next;
-                // new next is previous - swap
-                temp.Next = tempPrevious;
-                
-                tempPrevious = temp;
+
+                // swap next with previous
+                temp.Next = previous;
+
+                // traverse list storing previous
+                previous = temp;
                 temp = next;
             }
-            // head = tail
-            _head = tempPrevious;
+
+            // set the tail as new head
+            _head = previous;
 
             PrintList();
         }
 
+        public void ReverseRecursion()
+        {            
+            _head = ReverseListRecursion(_head);
+            PrintList();
+        }
+
+        private Node ReverseListRecursion(Node head)
+        { 
+            if (head == null || head.Next == null)
+            {
+                return head;
+            }
+
+            var newHead = ReverseListRecursion(head.Next);
+            head.Next.Next = head;
+            head.Next = null;
+
+            return newHead;
+        }
+
+        public bool HasCycle(Node head) 
+        {
+            if(head == null)
+            {
+                return false;
+            }
+            bool hasCycle = false;
+            var slow = head;
+            var fast = head;
+        
+            while(slow.Next != null && 
+                (fast != null && fast.Next != null))
+            {
+                slow = slow.Next;
+                fast = fast.Next.Next;
+            
+                if(slow == fast)
+                {
+                    hasCycle = true;
+                    break;
+                }
+            }
+        
+            return hasCycle;
+        }
+
+        public Node MiddleNode()
+        {
+            if (IsEmpty)
+            {
+                return null;
+            }
+
+            var slow = _head;
+            var fast = _head;
+
+            while (fast != null && fast.Next != null)
+            {
+                slow = slow.Next;
+                fast = fast.Next.Next;
+            }
+
+            return slow;
+        }
 
         public void PrintList()
         {

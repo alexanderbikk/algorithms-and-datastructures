@@ -91,8 +91,12 @@ namespace DataStructures
 
             Console.WriteLine("Reverse");
 
+
             linkedList.Reverse();
             linkedList.Reverse();
+
+            linkedList.ReverseRecursion();
+            linkedList.ReverseRecursion();
 
             Console.WriteLine("Delete");
             linkedList.Delete(10);
@@ -105,6 +109,39 @@ namespace DataStructures
 
             linkedList.PrintList();
             Console.WriteLine();
+
+
+            Console.WriteLine("Has cycle");
+
+            // list with cycle
+            var headWithCycle = new Node(3);
+            headWithCycle.Next = new Node(2);
+            headWithCycle.Next.Next = new Node(0);
+            headWithCycle.Next.Next.Next = new Node(-4);
+            headWithCycle.Next.Next.Next.Next = headWithCycle;
+
+            result = linkedList.HasCycle(headWithCycle);
+            Console.WriteLine(result);
+
+            // list without cycle
+            var headWithOutCycle = new Node(3);
+            headWithOutCycle.Next = new Node(2);
+            headWithOutCycle.Next.Next = new Node(0);
+            headWithOutCycle.Next.Next.Next = new Node(-4);
+
+            result = linkedList.HasCycle(headWithOutCycle);
+            Console.WriteLine(result);
+
+
+            linkedList.InsertAtHead(1);
+            linkedList.InsertAtHead(2);
+            linkedList.InsertAtHead(3);
+            linkedList.InsertAtHead(4);
+
+            linkedList.PrintList();
+            Console.WriteLine();
+            var middleNode = linkedList.MiddleNode();
+            Console.WriteLine(middleNode.Value);
         }
 
         public static void BTree()
