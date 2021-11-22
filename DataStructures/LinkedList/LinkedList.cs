@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AlgorithmsAndDataStructures.LinkedList
 {
@@ -223,6 +224,38 @@ namespace AlgorithmsAndDataStructures.LinkedList
             }
 
             return slow;
+        }
+
+        public void RemoveDublicates()
+        {
+            if (IsEmpty)
+            {
+                return;
+            }
+
+            var nodes = new Dictionary<int, Node>();
+            var temp = _head;
+            Node prev = null;
+
+            while (temp != null)
+            {
+                if (nodes.ContainsKey(temp.Value))
+                {
+                    if (prev != null)
+                    {
+                        prev.Next = temp.Next;                        
+                    }
+                }
+                else
+                {
+                    nodes.Add(temp.Value, temp);
+                    prev = temp;
+                }
+                
+                temp = temp.Next;
+                
+            }
+            
         }
 
         public void PrintList()

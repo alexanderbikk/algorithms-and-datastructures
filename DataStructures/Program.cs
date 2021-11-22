@@ -142,6 +142,21 @@ namespace DataStructures
             Console.WriteLine();
             var middleNode = linkedList.MiddleNode();
             Console.WriteLine(middleNode.Value);
+
+            linkedList = new LinkedList();
+            linkedList.InsertAtTail(2);
+            linkedList.InsertAtTail(2);
+            linkedList.InsertAtTail(2);
+            linkedList.InsertAtTail(2);
+            linkedList.InsertAtTail(2);
+            /*linkedList.InsertAtTail()*/;
+
+            linkedList.PrintList();
+            Console.WriteLine();
+
+            linkedList.RemoveDublicates();
+            linkedList.PrintList();
+            Console.WriteLine();
         }
 
         public static void BTree()
