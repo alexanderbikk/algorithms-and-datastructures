@@ -162,13 +162,13 @@ namespace AlgorithmsAndDataStructures.LinkedList
         }
 
         public void ReverseRecursion()
-        {            
+        {
             _head = ReverseListRecursion(_head);
             PrintList();
         }
 
         private Node ReverseListRecursion(Node head)
-        { 
+        {
             if (head == null || head.Next == null)
             {
                 return head;
@@ -181,28 +181,28 @@ namespace AlgorithmsAndDataStructures.LinkedList
             return newHead;
         }
 
-        public bool HasCycle(Node head) 
+        public bool HasCycle(Node head)
         {
-            if(head == null)
+            if (head == null)
             {
                 return false;
             }
             bool hasCycle = false;
             var slow = head;
             var fast = head;
-        
-            while(fast != null && fast.Next != null)
+
+            while (fast != null && fast.Next != null)
             {
                 slow = slow.Next;
                 fast = fast.Next.Next;
-            
-                if(slow == fast)
+
+                if (slow == fast)
                 {
                     hasCycle = true;
                     break;
                 }
             }
-        
+
             return hasCycle;
         }
 
@@ -243,25 +243,26 @@ namespace AlgorithmsAndDataStructures.LinkedList
             {
                 if (nodes.ContainsKey(temp.Value))
                 {
-                    if (prev != null)
-                    {
-                        prev.Next = temp.Next;                        
-                    }
+                    //if (prev != null)
+                    //{
+                        prev.Next = temp.Next;
+                    //}
                 }
                 else
                 {
                     nodes.Add(temp.Value, temp);
                     prev = temp;
                 }
-                
+
                 temp = temp.Next;
-                
+
             }
-            
+
         }
 
         /// <summary>
-        /// Kepp only non-dublicate values 1->1->1->2->3->4 to 2->3->4 or 1->2->3->3->3->4->4->5 to 1->2->5
+        /// Keep only non-dublicate values 1->1->1->2->3->4 to 2->3->4 or 1->2->3->3->3->4->4->5 to 1->2->5
+        /// No Sentinel node and temp pointer used
         /// </summary>
         /// <param name="head"></param>
         /// <returns></returns>
@@ -281,15 +282,13 @@ namespace AlgorithmsAndDataStructures.LinkedList
                 {
                     // traverse if no dublicates storing prev
                     prev = temp;
-                    temp = temp.Next;
                 }
                 else
                 {
-                    // traverse until last dublicate value
-                    var tempDublicate = temp;
-                    while (tempDublicate.Next != null && tempDublicate.Value == tempDublicate.Next.Value)
+                    // traverse until last dublicate value                    
+                    while (temp.Next != null && temp.Value == temp.Next.Value)
                     {
-                        tempDublicate = tempDublicate.Next;
+                        temp = temp.Next;
                     }
 
                     // skip all dublicate values
@@ -297,18 +296,61 @@ namespace AlgorithmsAndDataStructures.LinkedList
                     {
                         // prev can be null only when temp == head
                         // so just set head to next non-dublicate value
-                        _head = tempDublicate.Next;
+                        _head = temp.Next;
                     }
                     else
                     {
+                        prev.Next = temp.Next;
+                    }
+                }
+                // set temp to next non-dublicate value for further traversing
+                temp = temp.Next;
+            }
+        }
 
-                        prev.Next = tempDublicate.Next;
+        /// <summary>
+        /// Same as RemoveDuplicatesInSortedListAll but optimazire after LeetCode solution review
+        /// Using Sentinel node + no temp pointer since head could be changed during traversal when we have  Sentinel node
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+        public void RemoveDuplicatesInSortedListAllOptimized()
+        {
+            if (IsEmpty)
+            {
+                return;
+            }
+
+            // create sentinel node
+            var sentinelNode = new Node(0);
+            sentinelNode.Next = _head;
+
+
+            Node prev = sentinelNode;
+
+            while (_head != null && _head.Next != null)
+            {
+                if (_head.Value != _head.Next.Value)
+                {
+                    // traverse if no dublicates storing prev
+                    prev = prev.Next;
+                }
+                else
+                {
+                    // find sub-list with dublicates and traverse head poiter            
+                    while (_head.Next != null && _head.Value == _head.Next.Value)
+                    {
+                        _head = _head.Next;
                     }
 
-                    // set temp to next non-dublicate value for further traversing
-                    temp = tempDublicate.Next;
+                    // skip all duplicate values
+                    prev.Next = _head.Next;
                 }
-            }            
+                // set head to next for further traversing
+                // next non-duplicate value
+                _head = _head.Next;
+            }
+            _head = sentinelNode.Next;
         }
 
         public void PrintList()

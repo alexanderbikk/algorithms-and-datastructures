@@ -146,11 +146,12 @@ namespace DataStructures
 
             Console.WriteLine("Remove Dublicates In Unsorted List. Keep all except dublicates");
             linkedList = new LinkedList();
-            linkedList.InsertAtTail(2);
-            linkedList.InsertAtTail(2);
-            linkedList.InsertAtTail(2);
-            linkedList.InsertAtTail(2);
-            linkedList.InsertAtTail(2);            
+            linkedList.InsertAtTail(7);
+            linkedList.InsertAtTail(14);
+            linkedList.InsertAtTail(21);
+            linkedList.InsertAtTail(22);
+            linkedList.InsertAtTail(14);
+            linkedList.InsertAtTail(7);
 
             linkedList.PrintList();
             Console.WriteLine();
@@ -175,6 +176,7 @@ namespace DataStructures
             Console.WriteLine();
 
             linkedList.RemoveDuplicatesInSortedListAll();
+            //linkedList.RemoveDuplicatesInSortedListAllOptimized();
             linkedList.PrintList();
             Console.WriteLine();
 
