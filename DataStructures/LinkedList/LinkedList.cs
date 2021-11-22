@@ -191,8 +191,7 @@ namespace AlgorithmsAndDataStructures.LinkedList
             var slow = head;
             var fast = head;
         
-            while(slow.Next != null && 
-                (fast != null && fast.Next != null))
+            while(fast != null && fast.Next != null)
             {
                 slow = slow.Next;
                 fast = fast.Next.Next;
@@ -226,7 +225,10 @@ namespace AlgorithmsAndDataStructures.LinkedList
             return slow;
         }
 
-        public void RemoveDublicates()
+        /// <summary>
+        /// Keep all values without dublicates e.g. 1->3->5->5->4->1 to 1->3->5->4
+        /// </summary>
+        public void RemoveDublicatesInUnsortedList()
         {
             if (IsEmpty)
             {
@@ -256,6 +258,57 @@ namespace AlgorithmsAndDataStructures.LinkedList
                 
             }
             
+        }
+
+        /// <summary>
+        /// Kepp only non-dublicate values 1->1->1->2->3->4 to 2->3->4 or 1->2->3->3->3->4->4->5 to 1->2->5
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+        public void RemoveDuplicatesInSortedListAll()
+        {
+            if (IsEmpty)
+            {
+                return;
+            }
+
+            var temp = _head;
+            Node prev = null;
+
+            while (temp != null && temp.Next != null)
+            {
+                if (temp.Value != temp.Next.Value)
+                {
+                    // traverse if no dublicates storing prev
+                    prev = temp;
+                    temp = temp.Next;
+                }
+                else
+                {
+                    // traverse until last dublicate value
+                    var tempDublicate = temp;
+                    while (tempDublicate.Next != null && tempDublicate.Value == tempDublicate.Next.Value)
+                    {
+                        tempDublicate = tempDublicate.Next;
+                    }
+
+                    // skip all dublicate values
+                    if (prev == null)
+                    {
+                        // prev can be null only when temp == head
+                        // so just set head to next non-dublicate value
+                        _head = tempDublicate.Next;
+                    }
+                    else
+                    {
+
+                        prev.Next = tempDublicate.Next;
+                    }
+
+                    // set temp to next non-dublicate value for further traversing
+                    temp = tempDublicate.Next;
+                }
+            }            
         }
 
         public void PrintList()

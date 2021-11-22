@@ -131,8 +131,9 @@ namespace DataStructures
 
             result = linkedList.HasCycle(headWithOutCycle);
             Console.WriteLine(result);
+            Console.WriteLine();
 
-
+            Console.WriteLine("Middle Node. Two pointers");
             linkedList.InsertAtHead(1);
             linkedList.InsertAtHead(2);
             linkedList.InsertAtHead(3);
@@ -143,20 +144,40 @@ namespace DataStructures
             var middleNode = linkedList.MiddleNode();
             Console.WriteLine(middleNode.Value);
 
+            Console.WriteLine("Remove Dublicates In Unsorted List. Keep all except dublicates");
             linkedList = new LinkedList();
             linkedList.InsertAtTail(2);
             linkedList.InsertAtTail(2);
             linkedList.InsertAtTail(2);
             linkedList.InsertAtTail(2);
+            linkedList.InsertAtTail(2);            
+
+            linkedList.PrintList();
+            Console.WriteLine();
+
+            linkedList.RemoveDublicatesInUnsortedList();
+            linkedList.PrintList();
+            Console.WriteLine();
+
+            Console.WriteLine("Remove Dublicates In Sorted List. Keep on non-dublicate nodes");
+            linkedList = new LinkedList();
+            linkedList.InsertAtTail(1);
+            linkedList.InsertAtTail(1);
+            linkedList.InsertAtTail(1);
             linkedList.InsertAtTail(2);
-            /*linkedList.InsertAtTail()*/;
+            linkedList.InsertAtTail(3);
+            linkedList.InsertAtTail(3);
+            linkedList.InsertAtTail(3);
+            linkedList.InsertAtTail(4);
+            linkedList.InsertAtTail(5);
 
             linkedList.PrintList();
             Console.WriteLine();
 
-            linkedList.RemoveDublicates();
+            linkedList.RemoveDuplicatesInSortedListAll();
             linkedList.PrintList();
             Console.WriteLine();
+
         }
 
         public static void BTree()
