@@ -197,6 +197,27 @@ namespace DataStructures
             
             linkedList.PrintList();
             Console.WriteLine();
+
+
+            Console.WriteLine("Intersection");
+            linkedList = new LinkedList();
+            linkedList.InsertAtTail(15);
+            linkedList.InsertAtTail(20);
+            linkedList.InsertAtTail(14);
+
+            var linkedList2 = new LinkedList();
+            linkedList2.InsertAtTail(14);
+            linkedList2.InsertAtTail(7);
+            linkedList2.InsertAtTail(21);
+
+            linkedList.PrintList();
+            linkedList2.PrintList();
+            Console.WriteLine();
+
+            linkedList.Intersection(linkedList2);
+
+            linkedList.PrintList();
+            Console.WriteLine();
         }
 
         public static void BTree()

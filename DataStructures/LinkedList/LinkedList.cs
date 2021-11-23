@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace AlgorithmsAndDataStructures.LinkedList
 {
@@ -430,6 +431,34 @@ namespace AlgorithmsAndDataStructures.LinkedList
             }
 
             _head = sentinelNode.Next;
+        }
+
+        public void Intersection(LinkedList list)
+        {
+            var nodes = new Dictionary<int, Node>();
+            var temp = list.Head;
+
+            while (temp != null)
+            {
+                nodes.Add(temp.Value, temp);
+                temp = temp.Next;                
+            }
+
+            var sentinelNode = new Node(0);
+            sentinelNode.Next = _head;
+            Node prev = sentinelNode;
+
+            while (_head != null)
+            {
+                if (!nodes.ContainsKey(_head.Value))
+                {
+                    prev.Next = _head.Next;
+                }
+
+                _head = _head.Next;
+}
+
+            _head = sentinelNode.Next;            
         }
 
         public void PrintList()
