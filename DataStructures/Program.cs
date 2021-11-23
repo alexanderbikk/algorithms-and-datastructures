@@ -160,7 +160,7 @@ namespace DataStructures
             linkedList.PrintList();
             Console.WriteLine();
 
-            Console.WriteLine("Remove Dublicates In Sorted List. Keep on non-dublicate nodes");
+            Console.WriteLine("Remove Dublicates In Sorted List. Keep only non-dublicate nodes");
             linkedList = new LinkedList();
             linkedList.InsertAtTail(1);
             linkedList.InsertAtTail(1);
@@ -180,6 +180,23 @@ namespace DataStructures
             linkedList.PrintList();
             Console.WriteLine();
 
+
+            Console.WriteLine("Remove Dublicates In Unsorted List. Keep only non-dublicate nodes");
+            linkedList = new LinkedList();
+            linkedList.InsertAtTail(1);
+            linkedList.InsertAtTail(1);
+            linkedList.InsertAtTail(2);
+            linkedList.InsertAtTail(3);
+            linkedList.InsertAtTail(2);
+            linkedList.InsertAtTail(4);
+
+            linkedList.PrintList();
+            Console.WriteLine();
+
+            linkedList.RemoveDuplicatesInUnsortedListAll();
+            
+            linkedList.PrintList();
+            Console.WriteLine();
         }
 
         public static void BTree()

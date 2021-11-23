@@ -243,10 +243,7 @@ namespace AlgorithmsAndDataStructures.LinkedList
             {
                 if (nodes.ContainsKey(temp.Value))
                 {
-                    //if (prev != null)
-                    //{
-                        prev.Next = temp.Next;
-                    //}
+                    prev.Next = temp.Next;
                 }
                 else
                 {
@@ -258,6 +255,36 @@ namespace AlgorithmsAndDataStructures.LinkedList
 
             }
 
+        }
+
+        /// <summary>
+        /// Keep all values without dublicates e.g. 1->3->3->5->5 to 1->3->5
+        /// Idea is similar as in RemoveDublicatesInUnsortedList but no Hash required since values sorted
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+        public Node RemoveDuplicatesInSortedList(Node head)
+        {
+            if (head == null)
+            {
+                return null;
+            }
+            var temp = head;
+            Node prev = null;
+
+            while (temp != null)
+            {
+                if (temp.Value == prev?.Value)
+                {
+                    prev.Next = temp.Next;
+                }
+                else
+                {
+                    prev = temp;
+                }
+                temp = temp.Next;
+            }
+            return head;
         }
 
         /// <summary>
@@ -350,6 +377,58 @@ namespace AlgorithmsAndDataStructures.LinkedList
                 // next non-duplicate value
                 _head = _head.Next;
             }
+            _head = sentinelNode.Next;
+        }
+
+
+        /// <summary>
+        /// Keep only non-dublicate values 3->2->2->1->3->2->4 to 1->4
+        /// </summary>
+        public void RemoveDuplicatesInUnsortedListAll()
+        {
+            if (IsEmpty)
+            {
+                return;
+            }
+
+            var sentinelNode = new Node(0);
+            sentinelNode.Next = _head;
+            
+            Node prev = null;
+
+            var duplicateNodes = new Dictionary<int, int>();
+
+            while (_head != null)
+            {
+                if (duplicateNodes.ContainsKey(_head.Value))
+                {
+                    duplicateNodes[_head.Value]++;
+                    prev.Next = _head.Next;
+                }
+                else
+                {
+                    duplicateNodes.Add(_head.Value, 1);
+                    prev = _head;
+                }
+                _head = _head.Next;
+            }
+
+            _head = sentinelNode.Next.Next;
+            prev = sentinelNode;
+
+            while (_head != null)
+            {
+                if (duplicateNodes[_head.Value] > 1)
+                {
+                    prev.Next = _head.Next;
+                }
+                else
+                {
+                    prev = _head;
+                }
+                _head = _head.Next;
+            }
+
             _head = sentinelNode.Next;
         }
 
