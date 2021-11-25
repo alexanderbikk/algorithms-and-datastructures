@@ -218,6 +218,28 @@ namespace DataStructures
 
             linkedList.PrintList();
             Console.WriteLine();
+
+            Console.WriteLine("Get Nth value from end of linked list");
+            linkedList = new LinkedList();
+            linkedList.InsertAtTail(1);
+            linkedList.InsertAtTail(2);
+            linkedList.InsertAtTail(3);
+            linkedList.InsertAtTail(4);
+            linkedList.InsertAtTail(5);
+            linkedList.InsertAtTail(6);
+            linkedList.InsertAtTail(7);
+            linkedList.InsertAtTail(8);
+            linkedList.InsertAtTail(9);
+
+            linkedList.PrintList();
+            Console.WriteLine();
+
+            var n = 3;
+            //var nthResult = linkedList.GetNthFromEnd(n);
+
+            var nthResult = linkedList.GetNthFromEndTwoPointers(n);
+
+            Console.WriteLine(nthResult);
         }
 
         public static void BTree()

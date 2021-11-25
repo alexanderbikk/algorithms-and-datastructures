@@ -461,6 +461,97 @@ namespace AlgorithmsAndDataStructures.LinkedList
             _head = sentinelNode.Next;            
         }
 
+        public int GetNthFromEnd(int k)
+        {
+            if (IsEmpty)
+            {
+                return -1;
+            }
+            var temp = _head;
+            var count = 0;
+            while (temp != null)
+            {
+                count++;
+                temp = temp.Next;
+            }
+
+            if (k > count)
+            {
+                return -1;
+            }
+
+            temp = _head;
+            while (count-- != k)
+            {
+                temp = temp.Next;
+            }
+
+            return temp.Value;
+        }
+
+        public int GetNthFromEndTwoPointers(int k)
+        {
+            if (IsEmpty)
+            {
+                return -1;
+            }
+            var nthPointer = _head;
+            while (k-- != 0)
+            {
+                if (nthPointer == null)
+                {
+                    return -1;
+                }
+                nthPointer = nthPointer.Next;
+            }
+
+            var temp = _head;
+
+            while (nthPointer != null)
+            {
+                nthPointer = nthPointer.Next;
+                temp = temp.Next;
+            }
+
+            return temp.Value;
+        }
+
+        public void RemoveNthFromEnd(int n)
+        {
+            if (IsEmpty)
+            {
+                return;
+            }
+
+            var nthPointer = _head;
+            while (n-- != 0)
+            {
+                if (nthPointer == null)
+                {
+                    return;
+                }
+                nthPointer = nthPointer.Next;
+            }
+
+
+            var temp = _head;
+            Node prev = null;
+            while (nthPointer != null)
+            {
+                nthPointer = nthPointer.Next;
+                prev = temp;
+                temp = temp.Next;
+            }
+
+            if (prev == null)
+            {
+                _head = _head.Next;
+            }
+            else
+            {
+                prev.Next = temp.Next;
+            }            
+        }
         public void PrintList()
         {
             if (IsEmpty)
