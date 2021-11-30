@@ -552,6 +552,67 @@ namespace AlgorithmsAndDataStructures.LinkedList
                 prev.Next = temp.Next;
             }            
         }
+
+        public void OddEvenList()
+        {
+            if (IsEmpty)
+            {
+                return;
+            }
+
+            var tail = _head;
+            var count = 1;
+            while (tail.Next != null)
+            {
+                count++;
+                tail = tail.Next;
+            }
+
+            var even = _head.Next;
+            var prev = _head;
+            //stop count - when all even nodes will be traversed
+            var k = count / 2;
+            while (k-- != 0 && even != null && even.Next != null)
+            {
+                // delete even node
+                prev.Next = even.Next;
+                prev = prev.Next;
+
+                // put even node to the end and traverse tail
+                tail.Next = even;
+                tail = tail.Next;
+
+                even = even.Next.Next;
+                // avoid circular list
+                tail.Next = null;
+            }            
+        }
+
+        public void OddEvenListOptimized()
+        {
+            if (IsEmpty)
+            {
+                return;
+            }
+
+            var odd = _head;
+            var even = _head.Next;
+            var evenList = even;
+
+            while (even != null && even.Next != null)
+            {
+                odd.Next = even.Next;
+                //odd.next = odd.next.next;
+                odd = odd.Next;
+
+                even.Next = odd.Next;
+                //even.next = even.next.next;
+                even = even.Next;
+            }
+
+            odd.Next = evenList;        
+        }
+
         public void PrintList()
         {
             if (IsEmpty)

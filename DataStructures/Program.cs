@@ -240,6 +240,21 @@ namespace DataStructures
             var nthResult = linkedList.GetNthFromEndTwoPointers(n);
 
             Console.WriteLine(nthResult);
+
+            Console.WriteLine("Odd Even List");
+            linkedList = new LinkedList();
+            linkedList.InsertAtTail(1);
+            linkedList.InsertAtTail(2);
+            linkedList.InsertAtTail(3);
+            linkedList.InsertAtTail(4);
+            //linkedList.InsertAtTail(5);
+
+            linkedList.PrintList();
+            Console.WriteLine();
+
+            linkedList.OddEvenListOptimized();
+            linkedList.PrintList();
+            Console.WriteLine();
         }
 
         public static void BTree()
