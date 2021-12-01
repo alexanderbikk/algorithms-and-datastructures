@@ -255,6 +255,22 @@ namespace DataStructures
             linkedList.OddEvenListOptimized();
             linkedList.PrintList();
             Console.WriteLine();
+
+
+            Console.WriteLine("Is Palindrome");
+            linkedList = new LinkedList();
+            linkedList.InsertAtTail(1);
+            linkedList.InsertAtTail(2);
+            linkedList.InsertAtTail(5);
+            linkedList.InsertAtTail(2);
+            linkedList.InsertAtTail(1);            
+
+            linkedList.PrintList();
+            Console.WriteLine();
+
+            result = linkedList.IsPalindrome();
+            linkedList.PrintList();
+            Console.WriteLine(result);
         }
 
         public static void BTree()

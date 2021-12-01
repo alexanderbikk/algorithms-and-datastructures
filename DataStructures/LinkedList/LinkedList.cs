@@ -394,7 +394,7 @@ namespace AlgorithmsAndDataStructures.LinkedList
 
             var sentinelNode = new Node(0);
             sentinelNode.Next = _head;
-            
+
             Node prev = null;
 
             var duplicateNodes = new Dictionary<int, int>();
@@ -441,7 +441,7 @@ namespace AlgorithmsAndDataStructures.LinkedList
             while (temp != null)
             {
                 nodes.Add(temp.Value, temp);
-                temp = temp.Next;                
+                temp = temp.Next;
             }
 
             var sentinelNode = new Node(0);
@@ -456,9 +456,9 @@ namespace AlgorithmsAndDataStructures.LinkedList
                 }
 
                 _head = _head.Next;
-}
+            }
 
-            _head = sentinelNode.Next;            
+            _head = sentinelNode.Next;
         }
 
         public int GetNthFromEnd(int k)
@@ -550,7 +550,7 @@ namespace AlgorithmsAndDataStructures.LinkedList
             else
             {
                 prev.Next = temp.Next;
-            }            
+            }
         }
 
         public void OddEvenList()
@@ -585,7 +585,7 @@ namespace AlgorithmsAndDataStructures.LinkedList
                 even = even.Next.Next;
                 // avoid circular list
                 tail.Next = null;
-            }            
+            }
         }
 
         public void OddEvenListOptimized()
@@ -610,7 +610,54 @@ namespace AlgorithmsAndDataStructures.LinkedList
                 even = even.Next;
             }
 
-            odd.Next = evenList;        
+            odd.Next = evenList;
+        }
+
+        public bool IsPalindrome()
+        {
+            if (IsEmpty)
+            {
+                return false;
+            }
+
+            var temp = _head;
+            var count = 0;
+            while (temp != null)
+            {
+                count++;
+                temp = temp.Next;
+            }
+
+            var middle = (count / 2);
+
+            var fast = _head;
+            Node prev = null;
+
+            while (middle-- != 0)
+            {
+                var next = fast.Next;
+                fast.Next = prev;
+
+                prev = fast;
+                fast = next;
+            }
+
+            if (count % 2 > 0)
+            {
+                fast = fast.Next;
+            }
+
+            while (fast != null)
+            {
+                if (prev.Value != fast.Value)
+                {
+                    return false;
+                }
+                prev = prev.Next;
+                fast = fast.Next;
+            }
+
+            return true;
         }
 
         public void PrintList()
