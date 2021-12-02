@@ -620,44 +620,62 @@ namespace AlgorithmsAndDataStructures.LinkedList
                 return false;
             }
 
-            var temp = _head;
-            var count = 0;
-            while (temp != null)
+            var middleNode = FindMiddleOfTheList(_head);
+            var secondPartReversedHead = ReverseListInternal(middleNode.Next);
+
+            var firstPart = _head;
+            var secondPart = secondPartReversedHead;
+            while (secondPart != null)
             {
-                count++;
-                temp = temp.Next;
-            }
-
-            var middle = (count / 2);
-
-            var fast = _head;
-            Node prev = null;
-
-            while (middle-- != 0)
-            {
-                var next = fast.Next;
-                fast.Next = prev;
-
-                prev = fast;
-                fast = next;
-            }
-
-            if (count % 2 > 0)
-            {
-                fast = fast.Next;
-            }
-
-            while (fast != null)
-            {
-                if (prev.Value != fast.Value)
+                if (firstPart.Value != secondPart.Value)
                 {
                     return false;
                 }
-                prev = prev.Next;
-                fast = fast.Next;
+                secondPart = secondPart.Next;
+                firstPart = firstPart.Next;
             }
 
+            var secondPartNormalHead = ReverseListInternal(secondPartReversedHead);
+
+            middleNode.Next = secondPartNormalHead;
+
             return true;
+        }
+
+        /// <summary>
+        /// Adjusted to find first middle node for even list i ncase if there 2 middle node
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+        private Node FindMiddleOfTheList(Node head)
+        {
+            var slow = head;
+            var fast = head;
+
+            // important check to find first middle node for even lists 
+            while (fast.Next != null && fast.Next.Next != null)
+            {
+                fast = fast.Next.Next;
+                slow = slow.Next;
+            }
+
+            return slow;
+        }
+
+        private Node ReverseListInternal(Node head)
+        {
+            var temp = head;
+            Node prev = null;
+            while (temp != null)
+            {
+                var next = temp.Next;
+                temp.Next = prev;
+
+                prev = temp;
+                temp = next;
+            }
+
+            return prev;
         }
 
         public void PrintList()
