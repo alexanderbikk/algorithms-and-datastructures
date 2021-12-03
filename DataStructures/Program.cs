@@ -276,7 +276,8 @@ namespace DataStructures
             linkedList = new LinkedList();
             linkedList.InsertAtTail(1);
             linkedList.InsertAtTail(2);
-            linkedList.InsertAtTail(5);
+            //linkedList.InsertAtTail(6);
+            //linkedList.InsertAtTail(6);
             linkedList.InsertAtTail(2);
             linkedList.InsertAtTail(1);            
 
