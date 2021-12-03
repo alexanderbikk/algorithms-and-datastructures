@@ -13,7 +13,8 @@ namespace DataStructures
     {
         static void Main(string[] args)
         {
-            LinkedList();
+            //LinkedList();
+            DoublyLinkedList();
 
             //ShowBSTTree();
             //ShowSearches();
@@ -22,6 +23,20 @@ namespace DataStructures
             //AVLTree();
 
             //BTree();
+        }
+
+
+        public static void DoublyLinkedList()
+        {
+            MyLinkedList myLinkedList = new MyLinkedList();
+            //myLinkedList.AddAtHead(1);
+            //myLinkedList.AddAtTail(3);
+            myLinkedList.AddAtIndex(0, 10);    
+            myLinkedList.AddAtIndex(0, 20);    
+            myLinkedList.AddAtIndex(1, 30);    
+            //myLinkedList.Get(1);              // return 2
+            //myLinkedList.DeleteAtIndex(0);    // now the linked list is 1->3
+            myLinkedList.Get(0);
         }
 
         public static void LinkedList()
