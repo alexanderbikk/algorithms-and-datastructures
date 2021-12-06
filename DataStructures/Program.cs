@@ -13,8 +13,8 @@ namespace DataStructures
     {
         static void Main(string[] args)
         {
-            //LinkedList();
-            DoublyLinkedList();
+            LinkedList();
+            //DoublyLinkedList();
 
             //ShowBSTTree();
             //ShowSearches();
@@ -287,6 +287,33 @@ namespace DataStructures
             result = linkedList.IsPalindrome();
             linkedList.PrintList();
             Console.WriteLine(result);
+
+            Console.WriteLine("Rotate list");
+            linkedList = new LinkedList();
+            linkedList.InsertAtTail(1);
+            linkedList.InsertAtTail(2);
+
+            linkedList.PrintList();
+            Console.WriteLine();
+
+            linkedList.RotateRight(1);
+            linkedList.PrintList();
+            Console.WriteLine(result);
+
+
+            Console.WriteLine("Insert in circular sorted list");
+            linkedList = new LinkedList();
+           
+            linkedList.InsertAtTail(1);
+            linkedList.InsertAtTail(2);
+            linkedList.InsertAtTail(3);
+
+            linkedList.PrintList();
+            Console.WriteLine();
+
+            linkedList.CreateCircularList();
+            linkedList.Insert(0);                        
+
         }
 
         public static void BTree()

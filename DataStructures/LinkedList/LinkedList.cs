@@ -678,6 +678,121 @@ namespace AlgorithmsAndDataStructures.LinkedList
             return prev;
         }
 
+        public void RotateRight(int k)
+        {
+            if (IsEmpty || k == 0)
+            {
+                return;
+            }
+
+            var tail = _head;
+            var count = 1;
+            while (tail.Next != null)
+            {
+                count++;
+                tail = tail.Next;
+            }
+
+            if (k % count == 0)
+            {
+                //list will be the same e.g. count = 5 k = 5, 10, 15 etc
+                return;
+            }
+
+            // make list circular
+            tail.Next = _head;
+
+            var n = count - k;
+            Node prev = null;
+            while (n != 0)
+            {
+                prev = _head;
+                _head = _head.Next;
+                n--;
+            }
+            //remove circle in list
+            //set new tail next to null
+            prev.Next = null;
+            
+            return;
+        }
+
+        public void CreateCircularList()
+        {
+            if (IsEmpty)
+            {
+                _head.Next = _head;
+            }
+
+            var tail = _head;
+            while (tail.Next != null)
+            {
+                tail = tail.Next;
+            }
+            tail.Next = _head;
+        }
+
+        public void Insert(int insertVal)
+        {
+            if (IsEmpty)
+            {
+                _head = new Node(insertVal);
+                _head.Next = _head;
+                return;
+            }
+
+            var (minNode, maxNode) = FindMinMaxNode(_head);
+            var newNode = new Node(insertVal);
+            if (insertVal < minNode.Value)
+            {
+                maxNode.Next = newNode;
+                newNode.Next = minNode;                
+            }
+            else
+            {
+                var targetNode = minNode;
+                while (targetNode.Next != minNode && newNode.Value > targetNode.Next.Value)
+                {
+                    targetNode = targetNode.Next;
+                }
+                newNode.Next = targetNode.Next;
+                targetNode.Next = newNode;
+            }
+            return;
+        }
+
+        private (Node minNode, Node prev) FindMinMaxNode(Node head)
+        {
+            Node prev = head;
+            var slow = head;
+            var fast = head.Next;
+            var minNode = head;
+            var maxNode = prev;
+            while (fast != null && fast.Next != null)
+            {
+                if (slow.Value < minNode.Value)
+                {
+                    minNode = slow;
+                   
+                }
+                if (slow.Value >= maxNode.Value)
+                {
+                    maxNode = slow;
+
+                }               
+                if (slow == fast)
+                {
+                    break;
+                }
+                
+                slow = slow.Next;
+                fast = fast.Next.Next;
+            }
+
+            return (minNode, maxNode);
+        }
+
+
         public void PrintList()
         {
             if (IsEmpty)
