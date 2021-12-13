@@ -194,5 +194,43 @@ namespace LeetCodeMedium.Trees.BinaryTree
             LeftViewRecursionInternal(root.LeftChild, level + 1);
             LeftViewRecursionInternal(root.RightChild, level + 1);            
         }
+
+        private List<Node<int>> _nodes = new();
+
+        /// <summary>
+        /// Flatten Binary Tree to list with only right values using pre-order ordering
+        /// </summary>
+        /// <param name="root"></param>
+        public void FlattenBinaryTree(Node<int> root)
+        {
+            if (root == null)
+            {
+                return;
+            }
+            PopulateLeftNodesPreOrder(root.LeftChild);
+            PopulateLeftNodesPreOrder(root.RightChild);
+
+
+            var current = root;
+            for (int i = 0; i < _nodes.Count; i++)
+            {
+                current.LeftChild = null;
+                current.RightChild = _nodes[i];
+                current = current.RightChild;
+            }
+        }
+
+        private void PopulateLeftNodesPreOrder(Node<int>  root)
+        {
+            if (root == null)
+            {
+                return;
+            }
+
+            _nodes.Add(root);
+            PopulateLeftNodesPreOrder(root.LeftChild);
+            PopulateLeftNodesPreOrder(root.RightChild);
+
+        }
     }
 }

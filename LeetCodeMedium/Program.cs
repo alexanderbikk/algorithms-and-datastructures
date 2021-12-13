@@ -96,7 +96,7 @@ namespace LeetCodeMedium
 
             TreeHelpers.LevelOrder(cbtInserter.Get_root());
 
-
+            Console.WriteLine("Left View of Binary tree Recursion + Iterative");
             values = new int?[] { 1, 2, 3, null, null, 4, 6, null, null, null, null, null, 5, null, null };
 
             root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
@@ -116,6 +116,13 @@ namespace LeetCodeMedium
                 Console.Write(item + " ");
             }
 
+            Console.WriteLine();
+            Console.WriteLine("Flatten Binary tryy to linked list pre-order ordering");
+            values = new int?[] { 1, null, 2, 3 };
+            root = TreeHelpers.BstFromPreorder(values);
+
+            solution.FlattenBinaryTree(root);
+            TreeHelpers.LevelOrder(root);
         }
 
 

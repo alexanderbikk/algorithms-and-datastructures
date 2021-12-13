@@ -26,6 +26,44 @@ namespace AlgorithmsAndDataStructures.Trees
             return root;
         }
 
+        public static Node<int> BstFromPreorder(int?[] values)
+        {
+            if (values == null || values.Length == 0)
+            {
+                return null;
+            }
+
+            var queue = new Queue<Node<int>>();
+            var root = new Node<int>(values[0].Value);
+            queue.Enqueue(root);
+
+            var i = 1;
+            while (queue.Count != 0 || i < values.Length)
+            {
+                var node = queue.Dequeue();
+                if (values[i].HasValue)
+                {
+                    node.LeftChild = new Node<int>(values[i].Value);
+                    queue.Enqueue(node.LeftChild);
+                }
+                i++;
+
+                if (i >= values.Length)
+                {
+                    break;
+                }
+
+                if (values[i] != null)
+                {
+                    node.RightChild = new Node<int>(values[i].Value);
+                    queue.Enqueue(node.RightChild);
+                }
+                i++;
+            }
+
+            return root;
+        }
+
         public static void  LevelOrder(Node<int> root)
         {
             var queue = new Queue<Node<int>>();
