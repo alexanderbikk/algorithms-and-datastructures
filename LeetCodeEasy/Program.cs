@@ -75,6 +75,39 @@ namespace LeetCodeEasy
             {
                 Console.Write(list[i] + " ");
             }
+
+            Console.WriteLine();
+            Console.WriteLine("Find  all ancestors for given node in BST");
+
+            values = new int?[] { 6, 4, 9, 2, 5, 8, 12, null, null, null, null, null, null, 10, 14 };
+            root = TreeHelpers.BstFromPreorder(values);
+            TreeHelpers.LevelOrder(root);
+            
+            var k = 2;
+            var ancestors = solution.FindAncestorsInBST(root, k);
+
+            foreach (int item in ancestors)
+            {
+                Console.Write(item + " ");
+            }
+            ancestors.Clear();
+            Console.WriteLine();
+
+            Console.WriteLine();
+            Console.WriteLine("Find  all ancestors for given node in Binary Tree");
+
+            values = new int?[] { 1, 2, 3, 4, 5, null, null, 7 };
+            root = TreeHelpers.BstFromPreorder(values);
+            TreeHelpers.LevelOrder(root);
+
+            k = 7;
+            ancestors = solution.FindAncestorsInBT(root, k);
+
+            foreach (int item in ancestors)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
         }
 
         static void Arrays()

@@ -194,10 +194,100 @@ namespace LeetCodeEasy.Trees.BinaryTree
                     root = stack.Pop();
                     nodes.Add(root.Value);
                     root = root.RightChild;
-                }               
+                }
             }
             return nodes;
         }
 
+        private List<int> _ancestors = new();
+
+        public List<int> FindAncestorsInBST(Node<int> root, int k)
+        {
+            FindAncestorsInBSTInternal(root, k);
+            return _ancestors;
+        }
+
+        private Node<int> FindAncestorsInBSTInternal(Node<int> root, int k)
+        {
+            if (root == null || root.Value == k)
+            {
+                return root;
+            }
+
+            Node<int> child;
+            if (k < root.Value)
+            {
+                child = FindAncestorsInBSTInternal(root.LeftChild, k);
+
+            }
+            else
+            {
+                child = FindAncestorsInBSTInternal(root.RightChild, k);
+            }
+
+            if (child == null)
+            {
+                return null;
+            }
+
+            _ancestors.Add(root.Value);
+            return root;
+        }
+
+
+        public List<int> FindAncestorsInBT(Node<int> root, int k)
+        {
+            _ = FindAncestorsInBTInternal(root, k);
+            return _ancestors;
+        }
+
+        private bool FindAncestorsInBTInternal(Node<int> root, int k)
+        {
+            if (root == null)
+            {
+                return false;
+            }
+
+            if (root.Value == k)
+            {
+                return true;
+            }
+
+            var nodeExists = FindAncestorsInBTInternal(root.LeftChild, k) || FindAncestorsInBTInternal(root.RightChild, k);
+            if (nodeExists)
+            {
+                _ancestors.Add(root.Value);
+            }
+
+            return nodeExists;
+        }
+
+        private Node<int> FindAncestorsInBTInternalNonOptimal(Node<int> root, int k)
+        {
+            if (root == null || root.Value == k)
+            {
+                return root;
+            }
+
+
+            var child = FindAncestorsInBTInternalNonOptimal(root.LeftChild, k);
+            
+            bool nodeExists;
+            if (child != null)
+            {
+                nodeExists = true;
+            }
+            else
+            {
+                child = FindAncestorsInBTInternalNonOptimal(root.RightChild, k);
+                nodeExists = child != null;
+            }
+
+            if (nodeExists)
+            {
+                _ancestors.Add(root.Value);
+            }
+            return root;
+        }
     }
 }
