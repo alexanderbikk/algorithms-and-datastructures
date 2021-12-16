@@ -123,6 +123,12 @@ namespace LeetCodeMedium
 
             solution.FlattenBinaryTree(root);
             TreeHelpers.LevelOrder(root);
+
+            values = new int?[] { 4,2,5,1,3};
+            root = TreeHelpers.BstFromPreorder(values);
+
+            root = solution.TreeToDoublyList(root);
+            
         }
 
 

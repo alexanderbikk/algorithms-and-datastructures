@@ -38,7 +38,7 @@ namespace AlgorithmsAndDataStructures.Trees
             queue.Enqueue(root);
 
             var i = 1;
-            while (queue.Count != 0 || i < values.Length)
+            while (queue.Count != 0 && i < values.Length)
             {
                 var node = queue.Dequeue();
                 if (values[i].HasValue)

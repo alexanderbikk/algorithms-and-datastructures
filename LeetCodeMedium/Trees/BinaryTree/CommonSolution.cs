@@ -232,5 +232,108 @@ namespace LeetCodeMedium.Trees.BinaryTree
             PopulateLeftNodesPreOrder(root.RightChild);
 
         }
+
+        
+        public Node<int> TreeToDoublyList(Node<int> root)
+        {
+            if (root == null)
+            {
+                return null;
+            }
+
+            if (root.LeftChild == null && root.RightChild == null)
+            {
+                root.RightChild = root;
+                root.LeftChild = root;
+                return root;
+            }
+
+            Node<int> prev = null;
+            var current = root;
+                       
+
+            while (current != null)
+            {
+                if (current.LeftChild == null)
+                {
+                    current.LeftChild = prev;
+                    prev = current;
+                    current = current.RightChild;
+                }
+                else
+                {
+
+                    var pred = current.LeftChild;
+                    while (pred.RightChild != null && pred.RightChild != current)
+                    {
+                        pred = pred.RightChild;
+                    }
+                    if (pred.RightChild == null)
+                    {
+                        // link predcessor on top of list
+                        pred.RightChild = current;
+                        current = current.LeftChild;
+                    }
+                    else
+                    {
+                        //current.left = null;
+                        current.LeftChild = prev;
+                        prev = current;
+                        current = current.RightChild;
+                    }
+                }
+            }
+
+            current = prev;
+            while (current.LeftChild != null)
+            {
+                current = current.LeftChild;
+            }
+
+            root = current;
+
+            prev.RightChild = root;
+            root.LeftChild = prev;
+
+            return root;
+
+        }
+
+
+        private Node<int> _prev = new(-1);
+        private Node<int> _head = new(-1);
+
+        public Node<int> TreeToDoublyListRecursion(Node<int> root)
+        {
+            if (root == null)
+            {
+                return null;
+            }
+
+            _prev = _head;
+
+            TreeToDoublyListInternal(root);
+            _prev.RightChild = _head.RightChild;
+            _head.RightChild.LeftChild = _prev;
+
+            return _head.RightChild;
+        }
+
+        private void TreeToDoublyListInternal(Node<int> root)
+        {
+            if (root == null)
+            {
+                return;
+            }
+
+            TreeToDoublyListInternal(root.LeftChild);
+
+            _prev.RightChild = root;
+            root.LeftChild = _prev;
+
+            _prev = root;
+
+            TreeToDoublyListInternal(root.RightChild);
+        }
     }
 }
