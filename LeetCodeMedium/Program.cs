@@ -117,18 +117,24 @@ namespace LeetCodeMedium
             }
 
             Console.WriteLine();
-            Console.WriteLine("Flatten Binary tryy to linked list pre-order ordering");
+            Console.WriteLine("Flatten Binary try to linked list pre-order ordering");
             values = new int?[] { 1, null, 2, 3 };
             root = TreeHelpers.BstFromPreorder(values);
 
             solution.FlattenBinaryTree(root);
             TreeHelpers.LevelOrder(root);
 
-            values = new int?[] { 4,2,5,1,3};
+
+            Console.WriteLine();
+            Console.WriteLine("Tree to doubly-linked list");            
+            values = new int?[] { 4, 2, 5, 1, 3 };
             root = TreeHelpers.BstFromPreorder(values);
 
             root = solution.TreeToDoublyList(root);
-            
+
+            root = TreeHelpers.BstFromPreorder(values);
+            root = solution.TreeToDoublyListRecursion(root);
+
         }
 
 

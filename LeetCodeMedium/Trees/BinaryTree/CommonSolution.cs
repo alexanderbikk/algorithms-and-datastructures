@@ -241,23 +241,22 @@ namespace LeetCodeMedium.Trees.BinaryTree
                 return null;
             }
 
-            if (root.LeftChild == null && root.RightChild == null)
-            {
-                root.RightChild = root;
-                root.LeftChild = root;
-                return root;
-            }
-
-            Node<int> prev = null;
-            var current = root;
-                       
+            // create dummy head of the new list to not lost head element after traversal
+            Node<int> head = new(-1);
+            // keep prev\last element of the list
+            var prev = head;
+            var current = root;                      
 
             while (current != null)
             {
                 if (current.LeftChild == null)
                 {
+                    // populate list
+                    prev.RightChild = current;
                     current.LeftChild = prev;
-                    prev = current;
+
+                    // traverse tree and list
+                    prev = prev.RightChild;
                     current = current.RightChild;
                 }
                 else
@@ -269,39 +268,30 @@ namespace LeetCodeMedium.Trees.BinaryTree
                         pred = pred.RightChild;
                     }
                     if (pred.RightChild == null)
-                    {
-                        // link predcessor on top of list
+                    {                        
                         pred.RightChild = current;
+                        // traverse left sub-tree 
                         current = current.LeftChild;
                     }
                     else
                     {
-                        //current.left = null;
+                        // populate list
+                        prev.RightChild = current;
                         current.LeftChild = prev;
-                        prev = current;
+
+                        // traverse tree and list
+                        prev = prev.RightChild;
                         current = current.RightChild;
                     }
                 }
             }
 
-            current = prev;
-            while (current.LeftChild != null)
-            {
-                current = current.LeftChild;
-            }
+            prev.RightChild = head.RightChild;
+            head.RightChild.LeftChild = prev;
 
-            root = current;
-
-            prev.RightChild = root;
-            root.LeftChild = prev;
-
-            return root;
-
+            return head.RightChild;
         }
-
-
-        private Node<int> _prev = new(-1);
-        private Node<int> _head = new(-1);
+      
 
         public Node<int> TreeToDoublyListRecursion(Node<int> root)
         {
@@ -310,30 +300,31 @@ namespace LeetCodeMedium.Trees.BinaryTree
                 return null;
             }
 
-            _prev = _head;
+            Node<int> head = new(-1);
+            var prev = head;
 
-            TreeToDoublyListInternal(root);
-            _prev.RightChild = _head.RightChild;
-            _head.RightChild.LeftChild = _prev;
+            prev = TreeToDoublyListInternal(root, prev);
+            prev.RightChild = head.RightChild;
+            head.RightChild.LeftChild = prev;
 
-            return _head.RightChild;
+            return head.RightChild;
         }
 
-        private void TreeToDoublyListInternal(Node<int> root)
+        private Node<int> TreeToDoublyListInternal(Node<int> root, Node<int> prev)
         {
             if (root == null)
             {
-                return;
+                return prev;
             }
 
-            TreeToDoublyListInternal(root.LeftChild);
+            prev = TreeToDoublyListInternal(root.LeftChild, prev);
 
-            _prev.RightChild = root;
-            root.LeftChild = _prev;
+            prev.RightChild = root;
+            root.LeftChild = prev;
 
-            _prev = root;
+            prev = root;
 
-            TreeToDoublyListInternal(root.RightChild);
+            return TreeToDoublyListInternal(root.RightChild, prev);
         }
     }
 }
