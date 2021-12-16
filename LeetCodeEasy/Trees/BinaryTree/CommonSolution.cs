@@ -289,5 +289,32 @@ namespace LeetCodeEasy.Trees.BinaryTree
             }
             return root;
         }
+
+        private List<int> nodes = new();
+        public List<int> FindKNodesFromRoot(Node<int> root, int k)
+        {
+            var distance = 0;
+            FindKNodesFromRootInternal(root, k, distance);
+            return nodes;
+        }
+
+        private void FindKNodesFromRootInternal(Node<int> root, int k, int distance)
+        {
+            if (root == null)
+            {
+                return;
+            }
+
+            if (distance == k)
+            {
+                nodes.Add(root.Value);
+                return;
+            }
+            distance++;
+
+            FindKNodesFromRootInternal(root.LeftChild, k, distance);            
+            FindKNodesFromRootInternal(root.RightChild, k, distance);
+
+        }
     }
 }

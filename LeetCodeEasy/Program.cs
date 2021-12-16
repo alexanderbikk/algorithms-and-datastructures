@@ -108,6 +108,22 @@ namespace LeetCodeEasy
                 Console.Write(item + " ");
             }
             Console.WriteLine();
+
+            Console.WriteLine();
+            Console.WriteLine("Find K Nodes From Root");
+
+            values = new int?[] { 6, 4, 9, 2, 5, 8, 12, null, null, null, null, null, null, 10, 14 };
+            root = TreeHelpers.BstFromPreorder(values);
+            TreeHelpers.LevelOrder(root);
+
+            k = 2;
+            var nodes = solution.FindKNodesFromRoot(root, k);
+
+            foreach (int item in nodes)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();            
         }
 
         static void Arrays()
