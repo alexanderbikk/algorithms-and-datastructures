@@ -140,8 +140,8 @@ namespace LeetCodeMedium
             values = new int?[] { 0, 2, 4, 1, null, 3, -1, 5, 1, null, 6, null, 8 };
             root = TreeHelpers.BstFromPreorder(values);
 
-            root = solution.Connect(root, 1);           
-
+            root = solution.Connect(root);
+           
         }
 
 

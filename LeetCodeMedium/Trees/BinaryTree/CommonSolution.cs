@@ -325,11 +325,9 @@ namespace LeetCodeMedium.Trees.BinaryTree
             prev = root;
 
             return TreeToDoublyListInternal(root.RightChild, prev);
-        }
+        }        
 
-        private int _visitedLevel = 0;
-
-        public Node<int> Connect(Node<int> root, int level)
+        public Node<int> Connect(Node<int> root)
         {
             if (root == null)
             {
