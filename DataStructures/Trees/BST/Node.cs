@@ -8,12 +8,14 @@ namespace AlgorithmsAndDataStructures.Trees.BST
         public T Value { get; set; }
         public Node<T> LeftChild { get; set; }
         public Node<T> RightChild { get; set; }
+        public Node<T> Next { get; set; }
 
         public Node(T value)
         {
             Value = value;
             LeftChild = null;
             RightChild = null;
+            Next = null;
         }
     }
 }

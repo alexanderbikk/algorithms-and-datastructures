@@ -190,9 +190,9 @@ namespace LeetCodeMedium.Trees.BinaryTree
                 _list.Add(root.Value);
                 maxLevel = level;
             }
-            
+
             LeftViewRecursionInternal(root.LeftChild, level + 1);
-            LeftViewRecursionInternal(root.RightChild, level + 1);            
+            LeftViewRecursionInternal(root.RightChild, level + 1);
         }
 
         private List<Node<int>> _nodes = new();
@@ -220,7 +220,7 @@ namespace LeetCodeMedium.Trees.BinaryTree
             }
         }
 
-        private void PopulateLeftNodesPreOrder(Node<int>  root)
+        private void PopulateLeftNodesPreOrder(Node<int> root)
         {
             if (root == null)
             {
@@ -233,7 +233,7 @@ namespace LeetCodeMedium.Trees.BinaryTree
 
         }
 
-        
+
         public Node<int> TreeToDoublyList(Node<int> root)
         {
             if (root == null)
@@ -245,7 +245,7 @@ namespace LeetCodeMedium.Trees.BinaryTree
             Node<int> head = new(-1);
             // keep prev\last element of the list
             var prev = head;
-            var current = root;                      
+            var current = root;
 
             while (current != null)
             {
@@ -268,7 +268,7 @@ namespace LeetCodeMedium.Trees.BinaryTree
                         pred = pred.RightChild;
                     }
                     if (pred.RightChild == null)
-                    {                        
+                    {
                         pred.RightChild = current;
                         // traverse left sub-tree 
                         current = current.LeftChild;
@@ -291,7 +291,7 @@ namespace LeetCodeMedium.Trees.BinaryTree
 
             return head.RightChild;
         }
-      
+
 
         public Node<int> TreeToDoublyListRecursion(Node<int> root)
         {
@@ -325,6 +325,62 @@ namespace LeetCodeMedium.Trees.BinaryTree
             prev = root;
 
             return TreeToDoublyListInternal(root.RightChild, prev);
+        }
+
+        private int _visitedLevel = 0;
+
+        public Node<int> Connect(Node<int> root, int level)
+        {
+            if (root == null)
+            {
+                return null;
+            }
+
+            Node<int> leftForemost = root;
+            while (leftForemost != null)
+            {
+                var current = leftForemost;
+                leftForemost = null;
+
+                // untill we meet last node in this level and this level wan't visited
+                while (current != null)
+                {
+                    if (current.LeftChild == null && current.RightChild == null)
+                    {
+                        current = current.Next;
+                        continue;
+                    }
+
+                    //set next for current if left exitst
+                    if (current.LeftChild != null)
+                    {
+                        current.LeftChild.Next = current.RightChild;
+                    }
+
+                    if (leftForemost == null)
+                    {
+                        leftForemost = current.LeftChild ?? current.RightChild;
+                    }
+
+                    var next = current.Next;
+                    while (next != null)
+                    {
+                        if (next.LeftChild != null || next.RightChild != null)
+                        {
+                            var currentLastChild = current.RightChild ?? current.LeftChild;
+                            //set next left for last child
+                            //left in next can be null in this case we should connect right child            
+                            currentLastChild.Next = next.LeftChild ?? next.RightChild;
+                            break;
+                        }
+                        next = next.Next;
+                    }
+                    current = next;
+                }
+            }
+
+
+            return root;
         }
     }
 }
