@@ -141,7 +141,20 @@ namespace LeetCodeMedium
             root = TreeHelpers.BstFromPreorder(values);
 
             root = solution.Connect(root);
-           
+
+
+
+            Console.WriteLine();
+            Console.WriteLine("Serialize binary tree");
+            values = new int?[] { 1, 2, 3, null, null, 4, 5 };
+            root = TreeHelpers.BstFromPreorder(values);
+
+            TreeSerializer treeSerializer = new();
+            var tree = treeSerializer.Serialize(root);
+            root = treeSerializer.Deserialize(tree);
+
+            TreeHelpers.LevelOrder(root);
+
         }
 
 
