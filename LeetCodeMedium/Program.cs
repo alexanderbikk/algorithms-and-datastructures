@@ -142,6 +142,15 @@ namespace LeetCodeMedium
 
             root = solution.Connect(root);
 
+            Console.WriteLine();
+            Console.WriteLine("Populating Next Right Pointers in Each Node");
+            values = new int?[] { 1,2,3,4,5,6,7};
+            root = TreeHelpers.BstFromPreorder(values);
+
+            root = solution.ConnectPerfectTree(root);            
+
+
+
 
 
             Console.WriteLine();

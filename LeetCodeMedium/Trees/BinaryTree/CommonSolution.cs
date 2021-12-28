@@ -380,5 +380,41 @@ namespace LeetCodeMedium.Trees.BinaryTree
 
             return root;
         }
+
+        public Node<int> ConnectPerfectTree(Node<int> root)
+        {
+            if (root == null)
+            {
+                return null;
+            }
+
+            var current = root;
+            Node<int> leftForemost = null;
+
+            while (current != null && current.LeftChild != null)
+            {
+                if (leftForemost == null)
+                {
+                    leftForemost = current.LeftChild;
+                }
+
+                current.LeftChild.Next = current.RightChild;
+                if (current.Next != null)
+                {
+                    current.RightChild.Next = current.Next.LeftChild;
+                }
+
+                current = current.Next;
+
+                if (current == null)
+                {
+                    current = leftForemost;
+                    leftForemost = null;
+                }
+            }
+
+
+            return root;
+        }
     }
 }
