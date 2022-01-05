@@ -21,7 +21,7 @@ namespace LeetCodeMedium.Trees.BST
                 // we rich the right depest node start decrease the count;
                 return -1;
             }
-            var count = 0;           
+            var count = 0;
 
             return FindMaxKthRecursive(root, k, ref count);
         }
@@ -123,13 +123,31 @@ namespace LeetCodeMedium.Trees.BST
                 return null;
             }
             var middlePos = (startPos + lastPos) / 2;
-           
+
             var root = arrayOfNodes[middlePos];
 
             root.LeftChild = BSTFromArray(arrayOfNodes, startPos, middlePos - 1);
             root.RightChild = BSTFromArray(arrayOfNodes, middlePos + 1, lastPos);
 
             return root;
+        }
+
+        public bool ContainsNearbyAlmostDuplicate(int[] nums, int k, int t)
+        {
+            var sortedSet = new SortedSet<long>();
+            for (var i = 1; i < nums.Length; i++)
+            {
+                if (sortedSet.GetViewBetween((long)nums[i] - t, (long)nums[i] + t).Count > 0)
+                    return true;               
+
+
+                sortedSet.Add(nums[i]);
+                if (sortedSet.Count > k)
+                {
+                    sortedSet.Remove(nums[i - k]);
+                }
+            }
+            return false;
         }
 
     }

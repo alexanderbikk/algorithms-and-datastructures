@@ -8,16 +8,16 @@ namespace LeetCodeMedium
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Binary Tree");
-            CommonBinaryTree();
+            //Console.WriteLine("Binary Tree");
+            //CommonBinaryTree();
 
 
             //TreeFromParentArray();
             //Console.WriteLine();
 
-            //Console.WriteLine("BST");
-            //BST();
-            //Console.WriteLine();
+            Console.WriteLine("BST");
+            BST();
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -51,6 +51,18 @@ namespace LeetCodeMedium
             root = soulution.BalanceBST(root);
             TreeHelpers.LevelOrder(root);
             Console.WriteLine();
+
+            Console.WriteLine();
+            Console.WriteLine("Containce dublicate 3");
+            var k = 2;
+            var t = 3;
+            var nums = new int[] { 1, 5, 9, 1, 5, 9 };
+
+            bool isContains = soulution.ContainsNearbyAlmostDuplicate(nums, k, t);            
+            Console.WriteLine(isContains);
+
+            Console.WriteLine();
+
         }
 
         public static void CommonBinaryTree()
