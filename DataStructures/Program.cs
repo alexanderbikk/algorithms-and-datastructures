@@ -5,6 +5,7 @@ using AlgorithmsAndDataStructures.Trees.AVL;
 using AlgorithmsAndDataStructures.Trees.BST;
 using AlgorithmsAndDataStructures.Trees.BTree;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace DataStructures
@@ -13,7 +14,7 @@ namespace DataStructures
     {
         static void Main(string[] args)
         {
-            LinkedList();
+            //LinkedList();
             //DoublyLinkedList();
 
             //ShowBSTTree();
@@ -23,6 +24,8 @@ namespace DataStructures
             //AVLTree();
 
             //BTree();
+
+            Heap();
         }
 
 
@@ -538,7 +541,51 @@ namespace DataStructures
             Console.WriteLine();
         }
 
+        public static void Heap()
+        {
+            var items = new (string, int)[] { new("a", 10), new("b", 20), new("d", 1) };
+            var minHeap = new PriorityQueue<string, int>(items);
+            Console.WriteLine(minHeap.Dequeue());
+            Console.WriteLine(minHeap.Count);
+            Console.WriteLine(minHeap.Dequeue());
+            Console.WriteLine(minHeap.Count);
+            Console.WriteLine(minHeap.Dequeue());
+            Console.WriteLine(minHeap.Count);
 
+            minHeap.Enqueue("test", 10);
+            Console.WriteLine(minHeap.Peek());
+
+
+            Console.WriteLine();
+
+            var maxHeap = new PriorityQueue<string, int>(items, new MaxInt32IComparer());
+            Console.WriteLine(maxHeap.Dequeue());
+            Console.WriteLine(maxHeap.Count);
+            Console.WriteLine(maxHeap.Dequeue());
+            Console.WriteLine(maxHeap.Count);
+            Console.WriteLine(maxHeap.Dequeue());
+            Console.WriteLine(maxHeap.Count);
+
+            maxHeap.Enqueue("test", 10);
+
+            Console.WriteLine(maxHeap.Peek());
+        }
+
+        public class MaxInt32IComparer : IComparer<int>
+        {
+            public int Compare(int x, int y)
+            {
+                return y - x;
+            }
+        }
+
+        public class MixInt32IComparer : IComparer<int>
+        {
+            public int Compare(int x, int y)
+            {
+                return x - y;
+            }
+        }
 
 
         /// <summary>
