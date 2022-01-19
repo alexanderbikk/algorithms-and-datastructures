@@ -1,4 +1,5 @@
-﻿using AlgorithmsAndDataStructures.LinkedList;
+﻿using AlgorithmsAndDataStructures;
+using AlgorithmsAndDataStructures.LinkedList;
 using AlgorithmsAndDataStructures.Searches;
 using AlgorithmsAndDataStructures.Trees;
 using AlgorithmsAndDataStructures.Trees.AVL;
@@ -25,7 +26,8 @@ namespace DataStructures
 
             //BTree();
 
-            Heap();
+            //Heap();
+            HeapCustom();
         }
 
 
@@ -569,6 +571,47 @@ namespace DataStructures
             maxHeap.Enqueue("test", 10);
 
             Console.WriteLine(maxHeap.Peek());
+        }
+
+        public static void HeapCustom()
+        {
+            var items = new int[] { 2, 8, 15, 5, 1, 20 };
+
+            var minHeap = new Heap<int>(items);
+            minHeap.Print();
+
+            Console.WriteLine(minHeap.Peek());
+            minHeap.Dequeue();
+
+            Console.WriteLine(minHeap.Peek());
+            minHeap.Dequeue();
+
+            minHeap.Enqueue(-10);
+            Console.WriteLine(minHeap.Peek());
+            minHeap.Print();
+
+            items = new int[] { 1, 2, 3, 4, 5, 6 };
+
+            var maxHeap = new Heap<int>(items, new MaxInt32IComparer());
+            maxHeap.Print();
+
+            Console.WriteLine(maxHeap.Peek());
+            maxHeap.Dequeue();
+
+            Console.WriteLine(maxHeap.Peek());
+            maxHeap.Dequeue();
+
+            Console.WriteLine(maxHeap.Peek());
+            maxHeap.Dequeue();
+
+            maxHeap.Enqueue(1000);
+            Console.WriteLine(maxHeap.Peek());
+            maxHeap.Print();
+
+            items = new int[] { 2, 8, 15, 5, 1, 20 };
+            
+            var maxHeap2 = new Heap<int>(items, new MaxInt32IComparer());
+            maxHeap2.Print();
         }
 
         public class MaxInt32IComparer : IComparer<int>

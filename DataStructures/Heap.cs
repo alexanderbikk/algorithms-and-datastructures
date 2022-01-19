@@ -16,7 +16,9 @@ namespace AlgorithmsAndDataStructures
         }
 
         public Heap(T[] items, IComparer<T> comparer = null)
-        {            
+        {
+            _items = new List<T>(items.Length * 2);
+
             _items.AddRange(items);
             _comparer = comparer;
             Heapify();
@@ -64,12 +66,21 @@ namespace AlgorithmsAndDataStructures
             return value;
         }
 
+        public void Print()
+        {
+            foreach (var item in _items)
+            {
+                Console.Write($"{item} ");
+            }
+            Console.WriteLine();
+        }
+
         private void Heapify()
         {
             //compleat binary tree property
             var lastParentIndex = (_items.Count - 1) / 2;
 
-            for (int i = lastParentIndex; i >= 0; lastParentIndex--)
+            for (int i = lastParentIndex; i >= 0; i--)
             {
                 ShiftDown(i);
             }
@@ -78,9 +89,9 @@ namespace AlgorithmsAndDataStructures
         private void ShiftDown(int index)
         {
             // check heap properties untill the given item(index) is parent
-            // leaf item already heapified it self
+            // leaf item already heapified itself
             var smallestChildIndex = index;
-            while (smallestChildIndex <= _items.Count - 1 / 2)
+            while (smallestChildIndex <= (_items.Count - 1) / 2)
             {
                 var leftChildIndex = GetLeftChild(smallestChildIndex);
                 var rightChildIndex = GetRightChild(smallestChildIndex);             
@@ -97,8 +108,9 @@ namespace AlgorithmsAndDataStructures
                 }
 
                 if (smallestChildIndex != index)
-                {
+                {                    
                     Swap(index, smallestChildIndex);
+                    index = smallestChildIndex;
                 }
                 else
                 {
