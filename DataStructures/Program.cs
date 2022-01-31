@@ -8,6 +8,7 @@ using AlgorithmsAndDataStructures.Trees.BTree;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DataStructures
 {
@@ -569,6 +570,8 @@ namespace DataStructures
             Console.WriteLine(maxHeap.Count);
 
             maxHeap.Enqueue("test", 10);
+
+            maxHeap.UnorderedItems.Select(x => x.Element).ToArray();
 
             Console.WriteLine(maxHeap.Peek());
         }

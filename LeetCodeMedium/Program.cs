@@ -1,6 +1,7 @@
 ﻿using AlgorithmsAndDataStructures.Trees;
 using LeetCodeMedium.Trees.BinaryTree;
 using System;
+using System.Linq;
 
 namespace LeetCodeMedium
 {
@@ -15,9 +16,14 @@ namespace LeetCodeMedium
             //TreeFromParentArray();
             //Console.WriteLine();
 
-            Console.WriteLine("BST");
-            BST();
+            //Console.WriteLine("BST");
+            //BST();
+            //Console.WriteLine();
+
+            Console.WriteLine("Heap");
+            Heap();
             Console.WriteLine();
+
         }
 
         /// <summary>
@@ -176,6 +182,20 @@ namespace LeetCodeMedium
 
             TreeHelpers.LevelOrder(root);
 
+        }
+
+        public static void Heap()
+        {
+            var solution = new Heaps.CommonSolution();
+            solution.TopKFrequent(new int[] { 1,1,3,2,2}, 2);
+            //new int[] { 1, 1,1, 2, 2, 3 }
+            var result = solution.TopKFrequentBucketSort(new int[] { 1, 1, 3, 3, 1, 2, 2, 2 }, 2);                       
+
+            foreach (var item in result)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
         }
 
 
