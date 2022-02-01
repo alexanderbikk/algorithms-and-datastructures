@@ -2,6 +2,7 @@
 using LeetCodeEasy.Arrays;
 using LeetCodeEasy.Trees.BinaryTree;
 using System;
+using System.Collections.Generic;
 
 namespace LeetCodeEasy
 {
@@ -9,8 +10,8 @@ namespace LeetCodeEasy
     {
         static void Main(string[] args)
         {
-            //Arrays();
-            CommonBinaryTree();
+            Arrays();
+            //CommonBinaryTree();
         }
 
         public static void CommonBinaryTree()
@@ -45,10 +46,10 @@ namespace LeetCodeEasy
             Console.WriteLine();
 
 
-            values = new int?[] { 1, 2, null,3, null,null,null };
+            values = new int?[] { 1, 2, null, 3, null, null, null };
             root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
             TreeHelpers.LevelOrder(root);
-            
+
             // revert tree
             root = solution.InvertTree(root);
             TreeHelpers.LevelOrder(root);
@@ -57,7 +58,7 @@ namespace LeetCodeEasy
             root = solution.InvertTree(root);
             TreeHelpers.LevelOrder(root);
 
-            values = new int?[] { 4,2,3,1,2,5,6 };
+            values = new int?[] { 4, 2, 3, 1, 2, 5, 6 };
             root = TreeHelpers.CreateTreeFromLevelOrderArrayDFS(values, 0);
             TreeHelpers.LevelOrder(root);
 
@@ -82,7 +83,7 @@ namespace LeetCodeEasy
             values = new int?[] { 6, 4, 9, 2, 5, 8, 12, null, null, null, null, null, null, 10, 14 };
             root = TreeHelpers.BstFromPreorder(values);
             TreeHelpers.LevelOrder(root);
-            
+
             var k = 2;
             var ancestors = solution.FindAncestorsInBST(root, k);
 
@@ -123,7 +124,7 @@ namespace LeetCodeEasy
             {
                 Console.Write(item + " ");
             }
-            Console.WriteLine();            
+            Console.WriteLine();
         }
 
         static void Arrays()
@@ -143,12 +144,22 @@ namespace LeetCodeEasy
             Console.WriteLine(result[0] + " " + result[1]);
 
 
-            nums = new int[] { 2, 0, 1};
+            nums = new int[] { 2, 0, 1 };
             solution.SortColors(nums);
             for (int i = 0; i < nums.Length; i++)
             {
                 Console.Write(nums[i] + " ");
             }
+
+
+            var intervals = new int[2][]
+            {
+                new int[] { 5, 8 },
+                new int[] { 6, 8 }
+            };
+
+            bool canAttend = solution.CanAttendMeetings(intervals);
+            Console.WriteLine(canAttend);
         }
 
     }

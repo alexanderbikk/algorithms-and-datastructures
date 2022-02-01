@@ -109,5 +109,21 @@ namespace LeetCodeEasy.Arrays
                 }
             }
         }
+
+        public bool CanAttendMeetings(int[][] intervals)
+        {
+            var comparer = Comparer<int>.Default;
+            Array.Sort(intervals, (x, y) => comparer.Compare(x[0], y[0]));
+
+            for (var i = 0; i < intervals.Length - 1; i++)
+            {
+                if (intervals[i][1] > intervals[i + 1][0])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
