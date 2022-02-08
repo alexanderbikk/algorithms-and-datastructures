@@ -20,10 +20,13 @@ namespace LeetCodeMedium
             //BST();
             //Console.WriteLine();
 
-            Console.WriteLine("Heap");
-            Heap();
-            Console.WriteLine();
+            //Console.WriteLine("Heap");
+            //Heap();
+            //Console.WriteLine();
 
+            Console.WriteLine("Arrays");
+            Arrays();
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -196,6 +199,32 @@ namespace LeetCodeMedium
                 Console.Write(item + " ");
             }
             Console.WriteLine();
+        }
+
+        public static void Arrays()
+        {
+            var solution = new Arrays.Solution();
+
+            var intervals = new int[3][]
+                {
+                    new int[] { 0, 30},
+                    new int[] { 5, 10},
+                    new int[] {15, 20}
+                };
+
+            //var intervals = new int[7][]
+            //{
+            //    new int[] { 2, 4 },
+            //    new int[] { 4, 5},
+            //    new int[] {5, 6},
+            //    new int[] {4, 6},
+            //    new int[] {8, 9},
+            //    new int[] {7, 10},
+            //    new int[] {8, 10}
+            //};            
+
+            var roomsCount = solution.MinMeetingRooms(intervals);
+            Console.WriteLine(roomsCount.ToString());
         }
 
 

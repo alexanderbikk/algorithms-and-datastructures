@@ -47,7 +47,6 @@ namespace LeetCodeMedium.Heaps
             return minHeap.UnorderedItems.Select(x => x.Item1).ToArray();
         }
 
-
         public int[] TopKFrequentBucketSort(int[] nums, int k)
         {
             // create heap with count of each element
@@ -99,7 +98,7 @@ namespace LeetCodeMedium.Heaps
             return buckets;
         }
 
-        public int[] PopulateTopKFrequent(List<int>[] buckets, int k)
+        private int[] PopulateTopKFrequent(List<int>[] buckets, int k)
         {
             var result = new int[k];
             var resultIndex = 0;
@@ -122,5 +121,7 @@ namespace LeetCodeMedium.Heaps
 
             return result;
         }
+
+      
     }
 }
