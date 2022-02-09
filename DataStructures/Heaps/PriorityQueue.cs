@@ -10,8 +10,15 @@ namespace AlgorithmsAndDataStructures.Heaps
         private readonly IComparer<TPriority> _comparer;
 
         public PriorityQueue(IComparer<TPriority> comparer = null)
+            : this(4, comparer)
         {
             _items = new List<(TElement, TPriority)>();
+            _comparer = comparer;
+        }
+
+        public PriorityQueue(int length, IComparer<TPriority> comparer = null)
+        {
+            _items = new List<(TElement, TPriority)>(length);
             _comparer = comparer;
         }
 
@@ -25,6 +32,14 @@ namespace AlgorithmsAndDataStructures.Heaps
         }
 
         public int Count => _items.Count;
+
+        public IEnumerable<(TElement, TPriority)> UnorderedItems
+        {
+            get
+            {
+                return _items.ToArray();
+            }
+        }
 
         public void Enqueue((TElement, TPriority) value)
         {

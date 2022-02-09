@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LeetCodeMedium.Heaps
@@ -122,6 +123,74 @@ namespace LeetCodeMedium.Heaps
             return result;
         }
 
-      
+
+        public struct ElementInfo : IComparable<ElementInfo>
+        {
+            public int RowNumber { get; set; }
+            public int Index { get; set; }
+            public int Value { get; set; }
+
+            public int CompareTo(ElementInfo other)
+            { 
+                return this.Value == other.Value ? this.RowNumber - other.RowNumber : this.Value - other.Value;
+            }
+        }
+
+        public class ElementInfoComparer : IComparer<ElementInfo>
+        {
+            public int Compare(ElementInfo x, ElementInfo y)
+            {
+                // compare by Value or by RowNumber(less first) when Values are the same
+                return x.CompareTo(y);
+            }
+        }
+
+
+        public int KthSmallest(int[][] matrix, int k)
+        {
+            var heapLength = matrix.Length > k ? k : matrix.Length;
+
+            var minHeap = new AlgorithmsAndDataStructures.Heaps.PriorityQueue<ElementInfo, ElementInfo>(heapLength, new ElementInfoComparer());
+
+            //populate initial Values
+            for (var i = 0; i < matrix.Length; i++)
+            {
+                var element = new ElementInfo
+                {
+                    RowNumber = i,
+                    Index = 0,
+                    Value = matrix[i][0]
+                };
+
+                minHeap.Enqueue((element, element));
+            }
+
+            //keep looking the Kth smallest value
+            //get the smallest value per all rows and push the next value based on stored column index in minHeap until k is not 0
+            
+            while (k != 1)
+            {
+                var elementInfo = minHeap.Dequeue();
+
+                if (elementInfo.Index < matrix.Length - 1)
+                {
+                    var nextElement = GetNextElement(matrix, elementInfo);
+                    minHeap.Enqueue((nextElement, nextElement));
+                }
+                k--;
+            }
+
+            return minHeap.Dequeue().Value;
+        }
+
+        private ElementInfo GetNextElement(int[][] matrix, ElementInfo elementInfo)
+        {
+            return new ElementInfo
+            {
+                RowNumber = elementInfo.RowNumber,
+                Index = elementInfo.Index + 1,
+                Value = matrix[elementInfo.RowNumber][elementInfo.Index + 1]
+            };
+        }
     }
 }

@@ -20,13 +20,13 @@ namespace LeetCodeMedium
             //BST();
             //Console.WriteLine();
 
-            //Console.WriteLine("Heap");
-            //Heap();
-            //Console.WriteLine();
-
-            Console.WriteLine("Arrays");
-            Arrays();
+            Console.WriteLine("Heap");
+            Heap();
             Console.WriteLine();
+
+            //Console.WriteLine("Arrays");
+            //Arrays();
+            //Console.WriteLine();
         }
 
         /// <summary>
@@ -189,7 +189,10 @@ namespace LeetCodeMedium
 
         public static void Heap()
         {
-            var solution = new Heaps.CommonSolution();
+
+            var solution = new Heaps.CommonSolution();           
+
+            Console.WriteLine("TopKFrequent - Bucket sort");
             solution.TopKFrequent(new int[] { 1,1,3,2,2}, 2);
             //new int[] { 1, 1,1, 2, 2, 3 }
             var result = solution.TopKFrequentBucketSort(new int[] { 1, 1, 3, 3, 1, 2, 2, 2 }, 2);                       
@@ -199,6 +202,20 @@ namespace LeetCodeMedium
                 Console.Write(item + " ");
             }
             Console.WriteLine();
+
+            Console.WriteLine("KthSmallest in sorted matrix");
+            var k = 8;
+            var matrix = new int[3][]
+                {
+                    new int[3] { 1, 5, 9},
+                    new int[3] { 10, 11, 13},
+                    new int[3] { 12, 13, 15}
+                };
+
+            var value = solution.KthSmallest(matrix, k);
+            Console.WriteLine(value);
+            Console.WriteLine();
+
         }
 
         public static void Arrays()
