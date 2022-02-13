@@ -1,4 +1,5 @@
 ﻿using AlgorithmsAndDataStructures.Trees;
+using LeetCodeMedium.Design;
 using LeetCodeMedium.Trees.BinaryTree;
 using System;
 using System.Linq;
@@ -20,13 +21,17 @@ namespace LeetCodeMedium
             //BST();
             //Console.WriteLine();
 
-            Console.WriteLine("Heap");
-            Heap();
-            Console.WriteLine();
+            //Console.WriteLine("Heap");
+            //Heap();
+            //Console.WriteLine();
 
             //Console.WriteLine("Arrays");
             //Arrays();
             //Console.WriteLine();
+
+            Console.WriteLine("Design");
+            Design();
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -244,6 +249,20 @@ namespace LeetCodeMedium
             Console.WriteLine(roomsCount.ToString());
         }
 
+
+        public static void Design()
+        {
+            var lruCache = new LRUCache(2);
+
+            lruCache.Put(2, 1);
+            lruCache.Put(1, 1);
+            lruCache.Put(2, 3);
+            lruCache.Put(4, 1);
+            lruCache.Get(1);
+
+            lruCache.Put(3, 3);
+            lruCache.Get(2);
+        }
 
         /// <summary>
         /// Practice with binary tree from paretn array
