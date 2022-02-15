@@ -11,9 +11,9 @@ namespace AlgorithmsAndDataStructures.Searches
         public int BinarySearch( int[] numbers, int value)
         {
             var startPos = 0;
-            var lastPos = numbers.Length;
+            var lastPos = numbers.Length - 1 ;
 
-            while (startPos < lastPos)
+            while (startPos <= lastPos)
             {
                 var currentPos = (startPos + lastPos) / 2;
                 if (value == numbers[currentPos])
@@ -23,11 +23,11 @@ namespace AlgorithmsAndDataStructures.Searches
 
                 if (value > numbers[currentPos])
                 {
-                    startPos = currentPos;
+                    startPos = currentPos + 1;
                 }
                 else
                 {
-                    lastPos = currentPos;
+                    lastPos = currentPos - 1;
                 }
             }
 

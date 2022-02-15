@@ -20,7 +20,7 @@ namespace DataStructures
             //DoublyLinkedList();
 
             //ShowBSTTree();
-            //ShowSearches();
+            ShowSearches();
 
             //SumInTree();
             //AVLTree();
@@ -28,7 +28,7 @@ namespace DataStructures
             //BTree();
 
             //Heap();
-            HeapCustom();
+            //HeapCustom();
         }
 
 
@@ -489,7 +489,7 @@ namespace DataStructures
 
             Console.WriteLine($"Trget {target} Result position {pos}");
 
-            target = 2;
+            target = 1;
             pos = search.BinarySearch(sortedArray, target);
 
             Console.WriteLine($"Trget {target} Result position {pos}");
