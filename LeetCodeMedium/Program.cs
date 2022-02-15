@@ -21,17 +21,17 @@ namespace LeetCodeMedium
             //BST();
             //Console.WriteLine();
 
-            //Console.WriteLine("Heap");
-            //Heap();
-            //Console.WriteLine();
+            Console.WriteLine("Heap");
+            Heap();
+            Console.WriteLine();
 
             //Console.WriteLine("Arrays");
             //Arrays();
             //Console.WriteLine();
 
-            Console.WriteLine("Design");
-            Design();
-            Console.WriteLine();
+            //Console.WriteLine("Design");
+            //Design();
+            //Console.WriteLine();
         }
 
         /// <summary>
@@ -221,6 +221,25 @@ namespace LeetCodeMedium
             Console.WriteLine(value);
             Console.WriteLine();
 
+            var medianFinder = new Heaps.MedianFinder();
+
+            medianFinder.AddNum(6);
+            var median = medianFinder.FindMedian();
+            medianFinder.AddNum(10);
+            median = medianFinder.FindMedian();
+            medianFinder.AddNum(2);
+            median = medianFinder.FindMedian();
+            medianFinder.AddNum(6);
+            median = medianFinder.FindMedian();
+            medianFinder.AddNum(5);
+            median = medianFinder.FindMedian();
+            medianFinder.AddNum(0);
+            median = medianFinder.FindMedian();
+            medianFinder.AddNum(6);
+            median = medianFinder.FindMedian();
+            medianFinder.AddNum(3);
+            median = medianFinder.FindMedian();
+            Console.WriteLine(median);
         }
 
         public static void Arrays()
