@@ -21,17 +21,17 @@ namespace LeetCodeMedium
             //BST();
             //Console.WriteLine();
 
-            Console.WriteLine("Heap");
-            Heap();
-            Console.WriteLine();
+            //Console.WriteLine("Heap");
+            //Heap();
+            //Console.WriteLine();
 
             //Console.WriteLine("Arrays");
             //Arrays();
             //Console.WriteLine();
 
-            //Console.WriteLine("Design");
-            //Design();
-            //Console.WriteLine();
+            Console.WriteLine("Design");
+            Design();
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -273,14 +273,27 @@ namespace LeetCodeMedium
         {
             var lruCache = new LRUCache(2);
 
-            lruCache.Put(2, 1);
-            lruCache.Put(1, 1);
-            lruCache.Put(2, 3);
-            lruCache.Put(4, 1);
-            lruCache.Get(1);
 
+            lruCache.Put(1, 1);
+            lruCache.Put(2, 2);
+            lruCache.Get(1);
             lruCache.Put(3, 3);
             lruCache.Get(2);
+            lruCache.Put(4, 4);
+
+            lruCache.Put(3, 3);
+            lruCache.Get(1);
+            lruCache.Get(3);
+            lruCache.Get(4);
+
+            //lruCache.Put(2, 1);
+            //lruCache.Put(1, 1);
+            //lruCache.Put(2, 3);
+            //lruCache.Put(4, 1);
+            //lruCache.Get(1);
+
+            //lruCache.Put(3, 3);
+            //lruCache.Get(2);
         }
 
         /// <summary>
