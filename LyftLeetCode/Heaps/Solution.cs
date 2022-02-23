@@ -7,10 +7,13 @@ public class Solution
 
     public MeetingRoomsSolution MeetingRoomsAdjusted { get; init; }
 
+    public KClosestSolution KClosest { get; init; }
+
     public Solution()
     {
         TaxiScheduling = new TaxiSchedulingSolution();
         MeetingRoomsAdjusted = new MeetingRoomsSolution();
+        KClosest = new KClosestSolution();
     }
 
     public class TaxiSchedulingSolution
@@ -72,7 +75,6 @@ public class Solution
 
     public class MeetingRoomsSolution
     {
-
         public class RoomComparer : IComparer<int[]>
         {
             public int Compare(int[]? x, int[]? y)
@@ -86,7 +88,7 @@ public class Solution
             int[][] resultRooms = new int[intervals.Length][];
 
             var comparer = Comparer<int>.Default;
-            Array.Sort(intervals, (x, y) =>  comparer.Compare(x[0], y[0]));
+            Array.Sort(intervals, (x, y) => comparer.Compare(x[0], y[0]));
 
             var meetings = new PriorityQueue<int[], int[]>(intervals.Length, new RoomComparer());
 
@@ -111,17 +113,17 @@ public class Solution
 
             var roomInfo = meetings.Peek();
             roomNumber = roomInfo[0];
-            var lastAvaliableRoomTime = roomInfo[1];          
+            var lastAvaliableRoomTime = roomInfo[1];
 
             if (lastAvaliableRoomTime <= interval.startTime)
             {
-                meetings.Dequeue();              
+                meetings.Dequeue();
             }
             else
             {
                 roomNumber = meetings.Count;
             }
-            
+
 
             meetings.Enqueue(new int[] { roomNumber, interval.endTime }, new int[] { roomNumber, interval.endTime });
             return roomNumber;
@@ -130,6 +132,59 @@ public class Solution
         private void UpdateResultRooms(int[][] rooms, int meetingIndex, int roomNumber)
         {
             rooms[meetingIndex] = new int[] { meetingIndex, roomNumber };
+        }
+    }
+
+
+    public class KClosestSolution
+    {
+        public int[][] KClosest(int[][] points, int k)
+        {
+            var pointComparer = new PointComparer();
+            var maxHeap = new PriorityQueue<int[], int[]>(k, pointComparer);
+
+            for (var i = 0; i < points.Length; i++)
+            {
+                var distance = CalculateDistanceToOrigin(points[i]);
+                var item = new int[] { distance, i };
+                if (i < k)
+                {
+                    maxHeap.Enqueue(item, item);
+                }
+                else
+                {
+                    var topItem = maxHeap.Peek();
+                    if (topItem[0] > item[0])
+                    {
+                        maxHeap.Dequeue();
+                        maxHeap.Enqueue(item, item);
+                    }
+                }
+            }
+
+            var result = new int[k][];
+            for (var i = 0; i < maxHeap.Count; i++)
+            {
+                var item = maxHeap.Dequeue();
+                result[i] = new int[2] { points[item[1]][0], points[item[1]][1] };
+            }
+
+            return result;
+        }
+
+        private int CalculateDistanceToOrigin(int[] point)
+        {
+            // distance to origin(0,0) can be simplified from sqrt (x1 - 0)^2 + (y1 - 0)^2 to sqrtx1^2 + y1^2 
+            //and we can comparee only sqrt values
+            return point[0] * point[0] + point[1] * point[1];
+        }
+
+        public class PointComparer : IComparer<int[]>
+        {
+            public int Compare(int[] x, int[] y)
+            {
+                return y[0] - x[0];
+            }
         }
     }
 }

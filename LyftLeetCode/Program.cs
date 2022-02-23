@@ -15,7 +15,7 @@ static void Heaps()
     var n = 10;
     var cabTravelTime = new int[] { 1, 3, 8, 3, 5 };
     var minTime = solution.TaxiScheduling.TaxiScheduling(n, cabTravelTime);
-    
+
     Console.WriteLine(minTime);
     Console.WriteLine();
 
@@ -35,14 +35,14 @@ static void Heaps()
 
     //};
 
-   // var intervals = new int[5][]
-   //{
-   //     new int[] { 4, 8 },
-   //     new int[] { 6, 8 },
-   //     new int[] { 9, 16 },
-   //     new int[] { 15, 16 },
-   //     new int[] { 17, 20 }
-   //};
+    // var intervals = new int[5][]
+    //{
+    //     new int[] { 4, 8 },
+    //     new int[] { 6, 8 },
+    //     new int[] { 9, 16 },
+    //     new int[] { 15, 16 },
+    //     new int[] { 17, 20 }
+    //};
 
     var intervals = new int[7][]
    {
@@ -60,6 +60,18 @@ static void Heaps()
     {
         Console.WriteLine($"{rooms[i][0]} {rooms[i][1]}");
     }
-    
+
     Console.WriteLine();
+
+
+    Console.WriteLine("K closest");
+    var points = new int[3][]
+    {
+        new int[] { -5, 4 },
+        new int[] { -6, -5 },
+        new int[] { 4, 6 }
+    };
+    solution.KClosest.KClosest(points, 2);
+    Console.WriteLine();
+
 }

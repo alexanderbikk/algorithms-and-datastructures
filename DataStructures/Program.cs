@@ -1,5 +1,6 @@
 ﻿using AlgorithmsAndDataStructures;
 using AlgorithmsAndDataStructures.LinkedList;
+using AlgorithmsAndDataStructures.Queues;
 using AlgorithmsAndDataStructures.Searches;
 using AlgorithmsAndDataStructures.Trees;
 using AlgorithmsAndDataStructures.Trees.AVL;
@@ -28,9 +29,26 @@ namespace DataStructures
             //BTree();
 
             //Heap();
-            HeapCustom();
+            //HeapCustom();
+
+            Queue();
         }
 
+        private static void Queue()
+        {
+            var cQueue = new CircularQueue(3);
+            cQueue.EnQueue(1);
+            cQueue.EnQueue(2);
+            cQueue.EnQueue(3);
+            cQueue.DeQueue();
+            cQueue.DeQueue();
+            cQueue.EnQueue(3);
+            cQueue.EnQueue(5);
+            cQueue.DeQueue();
+            cQueue.DeQueue();
+            cQueue.DeQueue();
+            cQueue.DeQueue();
+        }
 
         public static void DoublyLinkedList()
         {
