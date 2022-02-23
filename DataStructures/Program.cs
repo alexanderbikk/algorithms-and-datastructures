@@ -20,7 +20,7 @@ namespace DataStructures
             //DoublyLinkedList();
 
             //ShowBSTTree();
-            ShowSearches();
+            //ShowSearches();
 
             //SumInTree();
             //AVLTree();
@@ -28,7 +28,7 @@ namespace DataStructures
             //BTree();
 
             //Heap();
-            //HeapCustom();
+            HeapCustom();
         }
 
 
@@ -615,6 +615,12 @@ namespace DataStructures
             
             var maxHeap2 = new Heap<int>(items, new MaxInt32IComparer());
             maxHeap2.Print();
+
+
+            ConvertMaxHeap convertor = new();
+            var max = new List<int> { 9, 4, 7, 1, -2, 6, 5 };
+            var minHeapString = convertor.ConvertToMinHeap(max);
+            Console.WriteLine(minHeapString);
         }
 
         public class MaxInt32IComparer : IComparer<int>
